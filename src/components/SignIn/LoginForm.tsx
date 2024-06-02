@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        background: `url('src/assets/login.png') no-repeat center center`,
+        background: `url('/src/assets/login.png') no-repeat center center`,
         // background: `url('/mnt/data/image.png') no-repeat center center`,
         backgroundSize: 'cover',
         borderRadius: theme.spacing(2),
