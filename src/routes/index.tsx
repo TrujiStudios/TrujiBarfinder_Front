@@ -8,7 +8,8 @@ import AppBar from "../Nav";
 // import { SignIn } from "../components/SignIn/SignIn";
 // import { SignUp } from "../components/SignUp/SignUp";
 import RegistroForm from "../components/SignUp/RegistroForm";
-import LoginForm from "../components/SignIn/LoginForm";
+import LoginForm from "../components/SignIn/SignIn";
+// import LoginForm from "../components/SignIn/LoginForm";
 
 const router = createBrowserRouter([
   {
