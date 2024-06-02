@@ -41,7 +41,8 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        background: `url('/mnt/data/image.png') no-repeat center center`,
+        background: `url('src/assets/login.png') no-repeat center center`,
+        // background: `url('/mnt/data/image.png') no-repeat center center`,
         backgroundSize: 'cover',
         borderRadius: theme.spacing(2),
         height: '100%',
@@ -69,10 +70,11 @@ const LoginForm: React.FC = () => {
     return (
         <Container maxWidth="lg">
             <Paper className={classes.root} elevation={3}>
+
                 <Grid container>
                     <Grid item xs={12} md={6} className={classes.leftColumn}>
                         <Box textAlign="center">
-                            <img src="/path-to-your-logo.png" alt="Loggro Restobar" className={classes.logo} />
+                            <img src="/src/assets/logoLogin.png" alt="Loggro Restobar" className={classes.logo} />
                             <Typography variant="h5" gutterBottom>
                                 Te damos la bienvenida a
                             </Typography>
@@ -149,6 +151,9 @@ const LoginForm: React.FC = () => {
                         {/* Imagen de fondo se establece en el CSS */}
                     </Grid>
                 </Grid>
+                {/* <Box mt={3}>
+                    <img src="src\assets\registro.png" alt="Loggro Restobar" className={classes.image} />
+                </Box> */}
             </Paper>
         </Container>
     );

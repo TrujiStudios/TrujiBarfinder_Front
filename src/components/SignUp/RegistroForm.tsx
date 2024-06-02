@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
     },
     rightColumn: {
         paddingLeft: theme.spacing(2),
-        background: `url('/mnt/data/image.png') no-repeat center center`,
+        background: `url('/assets/registro.png') no-repeat center center`,
         backgroundSize: 'cover',
         color: '#fff',
     },
@@ -185,16 +185,17 @@ const RegistroForm: React.FC = () => {
                     </Grid>
                     <Grid item xs={12} md={6} className={classes.rightColumn}>
                         <Box display="flex" justifyContent="center" alignItems="center" height="100%" flexDirection="column" textAlign="center">
-                            <Typography variant="h4" gutterBottom>
-                                ¡Bienvenido a Loggro Restobar!
+                            <Typography style={{ color: 'black' }} variant="h4" gutterBottom>
+                                <strong>¡Bienvenido a <strong style={{ color: 'red' }}>Loggro Restobar!</strong> </strong>
                             </Typography>
-                            <Typography variant="body1">
-                                ¿Ya tienes una cuenta? <a href="/login" style={{ color: '#fff', textDecoration: 'underline' }}>Ingresa aquí</a>
+                            <Typography style={{ color: 'black' }} variant="body1">
+                                ¿Ya tienes una cuenta? <a href="/SignIn" style={{ color: 'black', textDecoration: 'underline' }}>Ingresa aquí</a>
                             </Typography>
-                            <Box mt={3}>
-                                <img src="/path-to-your-image.jpg" alt="Loggro Restobar" className={classes.image} />
-                            </Box>
                         </Box>
+                        TrujiStudiso
+                        {/* <Box mt={3}>
+                            <img src="src\assets\registro.png" alt="Loggro Restobar" className={classes.image} />
+                        </Box> */}
                     </Grid>
                 </Grid>
             </Paper>
