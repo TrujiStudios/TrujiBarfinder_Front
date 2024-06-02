@@ -48,7 +48,7 @@ function BarManagement() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <Outlet />
+      {/* <Outlet /> */}
     </>
   );
 }

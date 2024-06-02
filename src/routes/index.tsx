@@ -12,6 +12,7 @@ import BarManagement from "../components/ManagementSystem/appBarManagement/BarMa
 import { Verder } from "../components/ManagementSystem/Verder";
 import { Products } from "../components/ManagementSystem/Products";
 import ProtectedRoute from "../ProtectedRoute";
+import { Dashboard } from "../components/ManagementSystem/Dashboard";
 
 const router = createBrowserRouter([
   {
@@ -42,7 +43,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <BarManagement />
+        element: <Dashboard />
       },
       {
         path: "vender",
