@@ -5,11 +5,8 @@ import {
 import { Home } from "../components/Home";
 import { Contact } from "../components/Contact";
 import AppBar from "../Nav";
-// import { SignIn } from "../components/SignIn/SignIn";
-// import { SignUp } from "../components/SignUp/SignUp";
-import RegistroForm from "../components/SignUp/RegistroForm";
+import SignUp from "../components/SignUp/SignUp";
 import LoginForm from "../components/SignIn/SignIn";
-// import LoginForm from "../components/SignIn/LoginForm";
 
 const router = createBrowserRouter([
   {
@@ -26,7 +23,7 @@ const router = createBrowserRouter([
       },
       {
         path: "SignUp",
-        element: <RegistroForm />
+        element: <SignUp />
       },
       {
         path: "contact",
