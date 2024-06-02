@@ -1,83 +1,186 @@
-// import React from 'react'
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col'
-import Form from 'react-bootstrap/Form';
-// import Button from 'react-bootstrap/Button';
+import React from 'react';
+import { Container, TextField, Grid, Typography, MenuItem, Checkbox, Box, Hidden } from '@mui/material';
+// import { styled } from '@mui/system';
+
+import { Link } from 'react-router-dom';
+import { SignUpForm } from '../../hook/singUp';
+import { signUpThemes } from '../../themes/signUpThemes';
 
 
 
+const RegistroForm: React.FC = () => {
 
-export const SignUp = () => {
+    const { register, handleSubmit, errors, onSubmit, watch } = SignUpForm();
+
+    const { Root, FormControl, LeftColumn, RightColumn, CheckboxLabel, SubmitButton } = signUpThemes();
+
     return (
-        <Form>
-            <Container fluid="md" className='mt-4'>
-                <Row>
-                    <Col lg={8} className='mx-auto'>
+        <Container maxWidth="lg">
+            <Root elevation={3}>
+                <Grid container>
+                    <LeftColumn item xs={12} md={6}>
+                        <Typography variant="h4" align="center" gutterBottom>
+                            ¡Comienza tu experiencia Loggro!
+                        </Typography>
+                        <Typography variant="subtitle1" align="center" gutterBottom>
+                            Pruébalo gratis por 7 días
+                        </Typography>
+                        <form onSubmit={handleSubmit(onSubmit)}>
+                            <Grid container spacing={2}>
+                                <Grid item xs={12} sm={6}>
+                                    <FormControl>
+                                        <TextField
+                                            label="Nombre"
+                                            fullWidth
+                                            {...register('name', { required: 'Nombre es requerido' })}
+                                            error={!!errors.name}
+                                            helperText={errors.name?.message}
+                                        />
+                                    </FormControl>
+                                </Grid>
+                                <Grid item xs={12} sm={6}>
+                                    <FormControl>
+                                        <TextField
+                                            label="Apellido"
+                                            fullWidth
+                                            {...register('lastName', { required: 'Apellido es requerido' })}
+                                            error={!!errors.lastName}
+                                            helperText={errors.lastName?.message}
+                                        />
+                                    </FormControl>
+                                </Grid>
+                                <Grid item xs={12} sm={6}>
+                                    <FormControl>
+                                        <TextField
+                                            label="Número telefónico"
+                                            fullWidth
+                                            {...register('phone', { required: 'Teléfono es requerido' })}
+                                            error={!!errors.phone}
+                                            helperText={errors.phone?.message}
+                                        />
+                                    </FormControl>
+                                </Grid>
+                                <Grid item xs={12} sm={6}>
+                                    <FormControl>
+                                        <TextField
+                                            label="Nombre del negocio"
+                                            fullWidth
+                                            {...register('businessName', { required: 'Nombre del negocio es requerido' })}
+                                            error={!!errors.businessName}
+                                            helperText={errors.businessName?.message}
+                                        />
+                                    </FormControl>
+                                </Grid>
+                                <Grid item xs={12} sm={6}>
+                                    <FormControl>
+                                        <TextField
+                                            label="País"
+                                            fullWidth
+                                            {...register('country', { required: 'País es requerido' })}
+                                            error={!!errors.country}
+                                            helperText={errors.country?.message}
+                                        />
+                                    </FormControl>
+                                </Grid>
+                                <Grid item xs={12} sm={6}>
+                                    <FormControl>
+                                        <TextField
+                                            select
+                                            label="Tipo de negocio"
+                                            fullWidth
+                                            {...register('businessType', { required: 'Tipo de negocio es requerido' })}
+                                            error={!!errors.businessType}
+                                            helperText={errors.businessType?.message}
+                                        >
+                                            <MenuItem value="Restaurante">Restaurante</MenuItem>
+                                            <MenuItem value="Tienda">Tienda</MenuItem>
+                                            <MenuItem value="Servicio">Servicio</MenuItem>
+                                            <MenuItem value="Otro">Otro</MenuItem>
+                                        </TextField>
+                                    </FormControl>
+                                </Grid>
+                                <Grid item xs={12} sm={6}>
+                                    <FormControl>
+                                        <TextField
+                                            label="Correo"
+                                            fullWidth
+                                            {...register('email', {
+                                                required: 'Email es requerido',
+                                                pattern: {
+                                                    value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+                                                    message: 'Email no es válido'
+                                                }
+                                            })}
+                                            error={!!errors.email}
+                                            helperText={errors.email?.message}
+                                        />
+                                    </FormControl>
+                                </Grid>
+                                <Grid item xs={12} sm={6}>
+                                    <FormControl>
+                                        <TextField
+                                            label="Contraseña"
+                                            type="password"
+                                            fullWidth
+                                            {...register('password', {
+                                                required: 'Contraseña es requerida',
+                                                minLength: {
+                                                    value: 6,
+                                                    message: 'Contraseña debe tener al menos 6 caracteres'
+                                                }
+                                            })}
+                                            error={!!errors.password}
+                                            helperText={errors.password?.message}
+                                        />
+                                    </FormControl>
+                                </Grid>
+                                <Grid item xs={12} sm={6}>
+                                    <CheckboxLabel
+                                        control={<Checkbox {...register('preloadProducts')} />}
+                                        label="Productos Precargados"
+                                    />
+                                </Grid>
+                                <Grid item xs={12} sm={6}>
+                                    <CheckboxLabel
+                                        control={
+                                            <Checkbox
+                                                {...register('acceptTerms', { required: 'Debe aceptar los términos y condiciones' })}
+                                                checked={watch('acceptTerms')}
+                                            />
+                                        }
+                                        label="He leído y acepto la política de tratamiento de datos"
+                                    />
+                                    {errors.acceptTerms && <Typography color="error">{errors.acceptTerms.message}</Typography>}
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <SubmitButton type="submit" variant="contained" color="primary" fullWidth>
+                                        Registrarme
+                                    </SubmitButton>
+                                </Grid>
+                            </Grid>
+                        </form>
+                    </LeftColumn>
 
-                        <h1>Sign Up</h1>
+                    <Hidden smDown>
+                        <RightColumn item xs={12} md={6}>
+                            <Box display="flex" justifyContent="center" alignItems="end" height="100%" flexDirection="column" textAlign="center">
+                                <Typography style={{ marginTop: '30px', textAlign: 'center' }} variant="h4" gutterBottom>
+                                    <strong>¡Bienvenido a <strong style={{ color: 'red' }}>TrujiStudios Barfinder360!</strong> </strong>
+                                </Typography>
+                                <Typography style={{ marginRight: '100px' }} variant="body1">
+                                    {/* ¿Ya tienes una cuenta? <a href="/SignIn" style={{ color: 'red', textDecoration: 'underline' }}>Ingresa aquí</a> */}
+                                    ¿Ya tienes una cuenta? <Link to="/SignIn" style={{ color: 'red', textDecoration: 'underline' }}>Ingresa aquí</Link>
+                                </Typography>
+                            </Box>
+                            <Box style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }} mt={3}>
+                                {/* <Image style={{ height: '80px', width: '200px', marginTop: '50px', }} src="/assets/logoLogin.png" alt="Loggro Restobar" /> */}
+                            </Box>
+                        </RightColumn>
+                    </Hidden>
+                </Grid>
+            </Root>
+        </Container>
+    );
+};
 
-                        {/* Primera */}
-
-                        <Row className="mb-3">
-                            <Form.Group as={Col} md="4" controlId="formGridName">
-                                <Form.Label>Nombre</Form.Label>
-                                <Form.Control type="text" placeholder="Tu nombre" />
-                            </Form.Group>
-
-                            <Form.Group as={Col} md="4" controlId="formGridLasName">
-                                <Form.Label>Apellido</Form.Label>
-                                <Form.Control type="text" placeholder="Tu apellido" />
-                            </Form.Group>
-                        </Row>
-
-                        {/* Segunda  */}
-
-                        <Row className="mb-3">
-                            <Form.Group as={Col} controlId="formGridPhone">
-                                <Form.Label>Número telefónico</Form.Label>
-                                <Form.Control type="text" placeholder="Teléfono de contacto" />
-                            </Form.Group>
-
-                            <Form.Group as={Col} controlId="formGridCompanyName">
-                                <Form.Label>Nombre del negocio</Form.Label>
-                                <Form.Control type="text" placeholder="Nombre del negocio" />
-                            </Form.Group>
-                        </Row>
-
-                        {/* Tercera */}
-
-                        <Row className="mb-3">
-                            <Form.Group as={Col} controlId="formGridPais">
-                                <Form.Label>Pais</Form.Label>
-                                <Form.Control type="text" placeholder="Pais" />
-                            </Form.Group>
-
-                            <Form.Group as={Col} controlId="formGridTipoNegocio">
-                                <Form.Label>Tiipo de negocio</Form.Label>
-                                <Form.Control type="password" placeholder="Tipo de negocio" />
-                            </Form.Group>
-                        </Row>
-
-                        {/* Cuarta */}
-
-                        <Row className="mb-3">
-                            <Form.Group as={Col} controlId="formGridEmail">
-                                <Form.Label>Email</Form.Label>
-                                <Form.Control type="email" placeholder="Email" />
-                            </Form.Group>
-
-                            <Form.Group as={Col} controlId="formGridPassword">
-                                <Form.Label>Password</Form.Label>
-                                <Form.Control type="password" placeholder="Password" />
-                            </Form.Group>
-                        </Row>
-
-
-                    </Col>
-                </Row>
-
-            </Container>
-        </Form>
-    )
-}
+export default RegistroForm;
