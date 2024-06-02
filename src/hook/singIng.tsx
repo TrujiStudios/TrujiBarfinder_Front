@@ -4,14 +4,17 @@ import { reqResApi } from '../api/reqRes';
 import { SingIng } from '../interface/sigIngInterface';
 import { FormInputs } from '../types/signInTypes';
 import Swal from 'sweetalert2'
-// import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../AuthContext';
 
 
 
 export const SingIn = () => {
-    // const history = useHistory();
-    const { register, handleSubmit, formState: { errors } } = useForm<FormInputs>();
 
+    const navigate = useNavigate();
+
+    const { register, handleSubmit, formState: { errors } } = useForm<FormInputs>();
+    const { login } = useAuth();
     try {
 
         const onSubmit: SubmitHandler<FormInputs> = async (data) => {
@@ -27,7 +30,12 @@ export const SingIn = () => {
                     confirmButtonText: 'Ok'
                 });
 
-                // history.push('/dashboard');
+                // navigate('/dashboard/dashboard')
+                // Marca el usuario como autenticado
+                login();
+
+                // Redirige al dashboard
+                navigate('/dashboard');
 
 
             } catch (error: any) {
