@@ -4,6 +4,7 @@ import React from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { Container, TextField, Button, Grid, Typography, MenuItem, Paper, FormControlLabel, Checkbox, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { Hidden } from '@material-ui/core';
 
 type FormInputs = {
     name: string;
@@ -38,10 +39,20 @@ const useStyles = makeStyles((theme) => ({
         paddingRight: theme.spacing(2),
     },
     rightColumn: {
-        paddingLeft: theme.spacing(2),
-        background: `url('/assets/registro.png') no-repeat center center`,
+        paddingLeft: theme.spacing(6),
+        background: `url('src/assets/nuestra.jpg') no-repeat center center`,
         backgroundSize: 'cover',
-        color: '#fff',
+        color: 'black',
+        //poner foto opaca 
+        opacity: 0.6,
+        //poner en el centro
+        // display: 'flex',
+        // justifyContent: 'center',
+        // alignItems: 'center',
+        // un espacio arrba 
+        // marginTop: theme.spacing(17),
+        // textAlign: 'center',
+
     },
     checkboxLabel: {
         color: '#000',
@@ -183,20 +194,22 @@ const RegistroForm: React.FC = () => {
                             </Grid>
                         </form>
                     </Grid>
-                    <Grid item xs={12} md={6} className={classes.rightColumn}>
-                        <Box display="flex" justifyContent="center" alignItems="center" height="100%" flexDirection="column" textAlign="center">
-                            <Typography style={{ color: 'black' }} variant="h4" gutterBottom>
-                                <strong>¡Bienvenido a <strong style={{ color: 'red' }}>Loggro Restobar!</strong> </strong>
-                            </Typography>
-                            <Typography style={{ color: 'black' }} variant="body1">
-                                ¿Ya tienes una cuenta? <a href="/SignIn" style={{ color: 'black', textDecoration: 'underline' }}>Ingresa aquí</a>
-                            </Typography>
-                        </Box>
-                        TrujiStudiso
-                        {/* <Box mt={3}>
-                            <img src="src\assets\registro.png" alt="Loggro Restobar" className={classes.image} />
-                        </Box> */}
-                    </Grid>
+
+                    <Hidden smDown>
+                        <Grid item xs={12} md={6} className={classes.rightColumn}>
+                            <Box display="flex" justifyContent="center" alignItems="end" height="100%" flexDirection="column" textAlign="center">
+                                <Typography style={{ marginTop: '150px', textAlign: 'center' }} variant="h4" gutterBottom>
+                                    <strong>¡Bienvenido a <strong style={{ color: 'red' }}>Loggro Restobar!</strong> </strong>
+                                </Typography>
+                                <Typography style={{ textAlign: 'center' }} variant="body1">
+                                    ¿Ya tienes una cuenta? <a href="/SignIn" style={{ color: 'red', textDecoration: 'underline' }}>Ingresa aquí</a>
+                                </Typography>
+                            </Box>
+                            <Box style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }} mt={3}>
+                                <img style={{ height: '80px', width: '200px', marginTop: '50px', }} src="src\assets\logoLogin.png" alt="Loggro Restobar" className={classes.image} />
+                            </Box>
+                        </Grid>
+                    </Hidden>
                 </Grid>
             </Paper>
         </Container>
@@ -204,3 +217,4 @@ const RegistroForm: React.FC = () => {
 };
 
 export default RegistroForm;
+
