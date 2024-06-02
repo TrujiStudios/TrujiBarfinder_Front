@@ -30,7 +30,6 @@ export const SingIn = () => {
                     confirmButtonText: 'Ok'
                 });
 
-                // navigate('/dashboard/dashboard')
                 // Marca el usuario como autenticado
                 login();
 
