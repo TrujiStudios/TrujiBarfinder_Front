@@ -1,9 +1,8 @@
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { SingUpInterface } from '../interface/singUpInterface';
 import { reqResApi } from '../api/reqRes';
-// import axios from 'axios';
 import Swal from 'sweetalert2'
-import { useState } from 'react';
+// import { useState } from 'react';
 
 
 type FormInputs = {

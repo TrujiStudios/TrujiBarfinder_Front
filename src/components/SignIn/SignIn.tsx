@@ -1,73 +1,25 @@
 import React from 'react';
-import { useForm, SubmitHandler } from 'react-hook-form';
-import { Container, TextField, Button, Grid, Typography, Paper, FormControlLabel, Checkbox, Box } from '@mui/material';
-import { styled } from '@mui/system';
+import { Container, TextField, Grid, Typography, Checkbox, Box } from '@mui/material';
 import { Link } from 'react-router-dom';
+import { signInThemes } from '../../themes/signInThemes';
+import { SingIn } from '../../hook/singIng';
 
-type FormInputs = {
-  email: string;
-  password: string;
-  rememberMe: boolean;
-};
 
-const Root = styled(Paper)(({ theme }) => ({
-  padding: theme.spacing(4),
-  marginTop: theme.spacing(5),
-  borderRadius: theme.spacing(2),
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-}));
 
-const FormControl = styled(Box)(({ theme }) => ({
-  marginBottom: theme.spacing(2),
-}));
+const SignIn: React.FC = () => {
 
-const SubmitButton = styled(Button)(({ theme }) => ({
-  marginTop: theme.spacing(3),
-}));
+  const { Root, FormControl, SubmitButton, LeftColumn, RightColumn, Logo, CheckboxLabel } = signInThemes();
 
-const LeftColumn = styled(Grid)(({ theme }) => ({
-  paddingRight: theme.spacing(2),
-  [theme.breakpoints.down('md')]: {
-    paddingRight: theme.spacing(0),
-  },
-}));
+  const { register, handleSubmit, errors, onSubmit } = SingIn();
 
-const RightColumn = styled(Grid)(({ theme }) => ({
-  paddingLeft: theme.spacing(2),
-  [theme.breakpoints.down('md')]: {
-    paddingLeft: theme.spacing(0),
-    marginTop: theme.spacing(4),
-  },
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  background: `url('/src/assets/login.png') no-repeat center center`,
-  backgroundSize: 'cover',
-  borderRadius: theme.spacing(2),
-  height: '100%',
-}));
 
-const Logo = styled('img')(({ theme }) => ({
-  marginBottom: theme.spacing(2),
-}));
 
-const CheckboxLabel = styled(FormControlLabel)(({ theme }) => ({
-  color: '#000',
-}));
 
-const Image = styled('img')(({ theme }) => ({
-  width: '100%',
-  borderRadius: theme.spacing(2),
-}));
+  // const { register, handleSubmit, formState: { errors } } = useForm<FormInputs>();
 
-const LoginForm: React.FC = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm<FormInputs>();
-
-  const onSubmit: SubmitHandler<FormInputs> = (data) => {
-    console.log(data);
-  };
+  // const onSubmit: SubmitHandler<FormInputs> = (data) => {
+  //   console.log(data);
+  // };
 
   return (
     <Container maxWidth="lg">
@@ -161,4 +113,4 @@ const LoginForm: React.FC = () => {
   );
 };
 
-export default LoginForm;
+export default SignIn;
