@@ -10,7 +10,7 @@ import { signUpThemes } from '../../themes/signUpThemes';
 
 const RegistroForm: React.FC = () => {
 
-    const { register, handleSubmit, errors, onSubmit } = SignUpForm();
+    const { register, handleSubmit, errors, onSubmit, watch } = SignUpForm();
 
     const { Root, FormControl, LeftColumn, RightColumn, CheckboxLabel, SubmitButton } = signUpThemes();
 
@@ -142,7 +142,12 @@ const RegistroForm: React.FC = () => {
                                 </Grid>
                                 <Grid item xs={12} sm={6}>
                                     <CheckboxLabel
-                                        control={<Checkbox {...register('acceptTerms', { required: 'Debe aceptar los términos y condiciones' })} />}
+                                        control={
+                                            <Checkbox
+                                                {...register('acceptTerms', { required: 'Debe aceptar los términos y condiciones' })}
+                                                checked={watch('acceptTerms')}
+                                            />
+                                        }
                                         label="He leído y acepto la política de tratamiento de datos"
                                     />
                                     {errors.acceptTerms && <Typography color="error">{errors.acceptTerms.message}</Typography>}
