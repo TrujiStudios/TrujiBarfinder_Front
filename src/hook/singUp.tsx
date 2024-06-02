@@ -21,35 +21,24 @@ type FormInputs = {
 
 export const SignUpForm = () => {
 
-    const { register, handleSubmit, formState: { errors } } = useForm<FormInputs>();
-    const [form, setForm] = useState<SingUpInterface>({
-        name: '',
-        lastName: '',
-        phone: '',
-        businessName: '',
-        country: '',
-        businessType: '',
-        email: '',
-        password: '',
-        acceptTerms: false,
-        preloadProducts: false
-    });
+    const { register, handleSubmit, watch, formState: { errors } } = useForm<FormInputs>();
+    // const [form, setForm] = useState<SingUpInterface>({
+    //     name: '',
+    //     lastName: '',
+    //     phone: '',
+    //     businessName: '',
+    //     country: '',
+    //     businessType: '',
+    //     email: '',
+    //     password: '',
+    //     acceptTerms: false,
+    //     preloadProducts: false
+    // });
 
     const onSubmit: SubmitHandler<FormInputs> = async (data) => {
         const resp = await reqResApi.post<SingUpInterface>('/auth/signup', data);
-        console.log('RESPONSE <>', resp);
-        setForm({
-            name: '',
-            lastName: '',
-            phone: '',
-            businessName: '',
-            country: '',
-            businessType: '',
-            email: '',
-            password: '',
-            acceptTerms: false,
-            preloadProducts: false
-        });
+        console.log('handleSubmit <>', handleSubmit)
+        console.log('resp <>', resp)
         Swal.fire({
             title: '¡Registro exitoso!!!',
             text: '¡Bienvenido a Loggro!',
@@ -67,6 +56,7 @@ export const SignUpForm = () => {
         register,
         handleSubmit,
         errors,
-        onSubmit
+        onSubmit,
+        watch
     }
 };
