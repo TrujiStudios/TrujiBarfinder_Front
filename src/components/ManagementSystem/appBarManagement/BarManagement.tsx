@@ -5,11 +5,13 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import { Link, Outlet } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useAuth } from "../../../AuthContext";
+import axios from "axios";
 
 function BarManagement() {
   const { logout } = useAuth();
 
   const handleLogout = () => {
+    axios.post("http://localhost:5000/api/v1/auth/logout", {}, { withCredentials: true });
     logout();
   };
   return (
