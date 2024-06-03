@@ -4,8 +4,14 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { Link, Outlet } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { useAuth } from "../../../AuthContext";
 
 function BarManagement() {
+  const { logout } = useAuth();
+
+  const handleLogout = () => {
+    logout();
+  };
   return (
     <>
       <Navbar expand="lg" bg="danger">
@@ -41,7 +47,7 @@ function BarManagement() {
 
             </Nav>
             <Nav className="ms-auto">
-              <Nav.Link as={Link} to="/SignUp">
+              <Nav.Link as={Link} to="/signIn" onClick={handleLogout}>
                 Cerrar sesión
               </Nav.Link>
             </Nav>

@@ -21,7 +21,7 @@ export const SingIn = () => {
 
             try {
 
-                const resp = await reqResApi.post<SingIng>('/auth/login', data)
+                const resp = await reqResApi.post<SingIng>('/auth/login', data, { withCredentials: true })
                 console.log('resp <>', resp)
                 Swal.fire({
                     title: resp.data.message,
