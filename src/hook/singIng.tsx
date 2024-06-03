@@ -23,6 +23,7 @@ export const SingIn = () => {
 
                 const resp = await reqResApi.post<SingIng>('/auth/login', data, { withCredentials: true })
                 console.log('resp <>', resp)
+                //cosolo a cookies
                 Swal.fire({
                     title: resp.data.message,
                     text: `¡Bienvenido a Loggro! ${resp.data.company.name} ${resp.data.company.lastName}`,
