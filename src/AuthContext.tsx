@@ -42,12 +42,13 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => {
-        return !!Cookies.get('isAuthenticated'); //Cookies get lo que hace es que si existe la cookie isAuthenticated, retorna true, si no existe retorna false
+        return !!Cookies.get('isAuthenticated');
     });
 
     const login = () => {
         Cookies.set('isAuthenticated', 'true', { expires: 7 });
         setIsAuthenticated(true);
+
     };
 
     const logout = () => {
