@@ -13,7 +13,7 @@ import { Verder } from "../components/ManagementSystem/Verder";
 import { Products } from "../components/ManagementSystem/Products";
 import ProtectedRoute from "../ProtectedRoute";
 import { Dashboard } from "../components/ManagementSystem/Dashboard";
-import { Category } from "../components/ManagementSystem/category/Categoy";
+import Category from "../components/ManagementSystem/category/Categoy";
 
 const router = createBrowserRouter([
   {
