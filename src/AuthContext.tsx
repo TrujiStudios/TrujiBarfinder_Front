@@ -1,33 +1,4 @@
-// import React, { createContext, useContext, useState, ReactNode } from 'react';
 
-// interface AuthContextType {
-//     isAuthenticated: boolean;
-//     login: () => void;
-//     logout: () => void;
-// }
-
-// const AuthContext = createContext<AuthContextType | undefined>(undefined);
-
-// export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-//     const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-//     const login = () => setIsAuthenticated(true);
-//     const logout = () => setIsAuthenticated(false);
-
-//     return (
-//         <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
-//             {children}
-//         </AuthContext.Provider>
-//     );
-// };
-
-// export const useAuth = () => {
-//     const context = useContext(AuthContext);
-//     if (!context) {
-//         throw new Error('useAuth must be used within an AuthProvider');
-//     }
-//     return context;
-// };
 
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 import Cookies from 'js-cookie';
@@ -47,15 +18,24 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         return !!token;
     });
 
-    const login = async () => {
+    const login = async (data: boolean) => {
         // Simulate login logic
         // Cookies.set('token', document.cookie);
         console.log('Token <>:', Cookies.get('TrujiStudios'));
 
-        if (Cookies.get('TrujiStudios')) {
-            console.log('Token Check:', !!Cookies.get('TrujiStudios')); // Log for debugging
+        if (data) {
+            console.log('Token Check:', !!Cookies.get('TrujiStudios'));
             setIsAuthenticated(true);
         }
+        else {
+            Cookies.remove('TrujiStudios');
+            setIsAuthenticated(false);
+        }
+
+        // if (Cookies.get('TrujiStudios')) {
+        //     console.log('Token Check:', !!Cookies.get('TrujiStudios')); // Log for debugging
+        //     setIsAuthenticated(true);
+        // }
 
     };
 
