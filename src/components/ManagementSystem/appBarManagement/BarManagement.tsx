@@ -30,10 +30,6 @@ function BarManagement() {
               <Nav.Link as={Link} to="/dashboard/vender">
                 Vender
               </Nav.Link>
-              <Nav.Link as={Link} to="/dashboard/product">
-                productos
-              </Nav.Link>
-
 
               <NavDropdown title="Productos" id="basic-nav-dropdown">
                 <NavDropdown.Item as={Link} to='/dashboard/category' >Categorias</NavDropdown.Item>
