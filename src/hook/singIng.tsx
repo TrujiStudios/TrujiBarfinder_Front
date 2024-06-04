@@ -36,7 +36,7 @@ export const SingIn = () => {
                 // Marca el usuario como autenticado
                 console.log('resp <> 3', resp)
 
-                login(resp.data.company);
+                login();
 
                 // Redirige al dashboard
                 navigate('/dashboard');
