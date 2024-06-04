@@ -18,24 +18,16 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         return !!token;
     });
 
-    const login = async (data: boolean) => {
+    const login = async () => {
         // Simulate login logic
         // Cookies.set('token', document.cookie);
         console.log('Token <>:', Cookies.get('TrujiStudios'));
 
-        if (data) {
-            console.log('Token Check:', !!Cookies.get('TrujiStudios'));
+
+        if (Cookies.get('TrujiStudios')) {
+            console.log('Token Check:', !!Cookies.get('TrujiStudios')); // Log for debugging
             setIsAuthenticated(true);
         }
-        else {
-            Cookies.remove('TrujiStudios');
-            setIsAuthenticated(false);
-        }
-
-        // if (Cookies.get('TrujiStudios')) {
-        //     console.log('Token Check:', !!Cookies.get('TrujiStudios')); // Log for debugging
-        //     setIsAuthenticated(true);
-        // }
 
     };
 
