@@ -25,8 +25,10 @@ export const SingIn = () => {
                 console.log('resp <>', resp)
                 //cosolo a cookies
                 Swal.fire({
-                    title: resp.data.message,
-                    text: `¡Bienvenido a Loggro! ${resp.data.company.name} ${resp.data.company.lastName}`,
+                    // title: resp.data.message,
+                    title: '¡Bienvenido!',
+                    // text: `¡Bienvenido a Loggro! ${resp.data.company.name} ${resp.data.company.lastName}`,
+                    text: `¡Bienvenido a Loggro!`,
                     icon: 'success',
                     confirmButtonText: 'Ok'
                 });
