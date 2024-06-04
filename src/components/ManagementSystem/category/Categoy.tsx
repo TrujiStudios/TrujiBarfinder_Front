@@ -94,7 +94,7 @@ const TablaCategorias: React.FC = () => {
 
     return (
         <Container>
-            <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
+            <Box mt={10} display="flex" justifyContent="space-between" alignItems="center" mb={2}>
                 <TextField label="Buscar:" variant="outlined" size="small" />
                 <Button variant="contained" color="secondary" onClick={() => handleOpenModal()}>Nueva</Button>
             </Box>
