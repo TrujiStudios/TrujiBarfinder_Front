@@ -8,11 +8,12 @@ import AppBar from "../Nav";
 import SignUp from "../components/SignUp/SignUp";
 import SignIn from "../components/SignIn/SignIn";
 // import { Dashboard } from "../components/ManagementSystem/Dashboard";
-import BarManagement from "../components/ManagementSystem/appBarManagement/BarManagement";
+// import BarManagement from "../components/ManagementSystem/appBarManagement/BarManagement";
 import { Verder } from "../components/ManagementSystem/Verder";
 import { Products } from "../components/ManagementSystem/Products";
 import ProtectedRoute from "../ProtectedRoute";
 import { Dashboard } from "../components/ManagementSystem/Dashboard";
+import { Category } from "../components/ManagementSystem/category/Categoy";
 
 const router = createBrowserRouter([
   {
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
       {
         path: "product",
         element: <Products />
+      },
+      {
+        path: "category",
+        element: <Category />
       },
 
     ]
