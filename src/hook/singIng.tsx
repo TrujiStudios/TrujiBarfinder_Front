@@ -30,7 +30,7 @@ export const SingIn = () => {
                     icon: 'success',
                     confirmButtonText: 'Ok'
                 });
-
+                localStorage.setItem('token', resp.data.token);
                 // Marca el usuario como autenticado
                 login();
 

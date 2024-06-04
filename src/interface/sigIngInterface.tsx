@@ -13,4 +13,5 @@ export interface SingIng {
     rememberMe: boolean;
     message: string;
     company: inicio;
+    token: string;
 }
