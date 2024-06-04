@@ -22,7 +22,7 @@ export const SingIn = () => {
             try {
 
                 const resp = await reqResApi.post<SingIng>('/auth/login', data, { withCredentials: true })
-                console.log('resp <>', resp)
+                console.log('resp <>', resp.data.company)
                 //cosolo a cookies
                 Swal.fire({
                     // title: resp.data.message,
@@ -32,9 +32,11 @@ export const SingIn = () => {
                     icon: 'success',
                     confirmButtonText: 'Ok'
                 });
-                localStorage.setItem('token', resp.data.token);
+                // localStorage.setItem('token', resp.data);
                 // Marca el usuario como autenticado
-                login();
+                console.log('resp <> 3', resp)
+
+                login(resp.data.company);
 
                 // Redirige al dashboard
                 navigate('/dashboard');
