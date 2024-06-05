@@ -3,8 +3,6 @@ import { reqResApi } from '../api/reqRes';
 import { Category } from '../interface/categoryInterface';
 
 
-
-
 const emptyCategoria: Category = {
     id: '',
     name: '',
