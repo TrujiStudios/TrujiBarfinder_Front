@@ -7,8 +7,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import axios from 'axios';
 
 interface Categoria {
-    _id: string;
-    nombre: string;
+    id: string;
+    name: string;
 }
 
 interface Producto {
@@ -21,6 +21,17 @@ interface Producto {
     image: string;
     code: string;
 }
+
+const emptyProducto: Producto = {
+    _id: '',
+    name: '',
+    description: '',
+    price: 0,
+    category: '',
+    status: false,
+    image: '',
+    code: '',
+};
 
 const initialProductos: Producto[] = [];
 const initialCategorias: Categoria[] = [];
@@ -41,7 +52,7 @@ const Products: React.FC = () => {
 
     const fetchProductos = async (): Promise<void> => {
         try {
-            const response = await axios.get('http://localhost:5000/api/v1/product/get');
+            const response = await axios.get('http://localhost:5000/api/v1/product/get', { withCredentials: true });
             setProductos(response.data);
         } catch (error) {
             console.error('Error fetching productos:', error);
@@ -50,7 +61,7 @@ const Products: React.FC = () => {
 
     const fetchCategorias = async (): Promise<void> => {
         try {
-            const response = await axios.get('http://localhost:5000/api/v1/product/category/get');
+            const response = await axios.get('http://localhost:5000/api/v1/product/category/get', { withCredentials: true });
             setCategorias(response.data);
         } catch (error) {
             console.error('Error fetching categorias:', error);
@@ -58,7 +69,7 @@ const Products: React.FC = () => {
     };
 
     const handleOpenModal = (producto: Producto | null = null): void => {
-        setSelectedProducto(producto);
+        setSelectedProducto(producto ?? emptyProducto);
         setEditMode(producto !== null);
         setOpenModal(true);
     };
@@ -77,7 +88,8 @@ const Products: React.FC = () => {
             }
         } else {
             try {
-                await axios.post('http://localhost:5000/api/v1/product/create', selectedProducto);
+                console.log("NUEVO PRODUCTO", selectedProducto);
+                await axios.post('http://localhost:5000/api/v1/product/create', selectedProducto, { withCredentials: true });
             } catch (error) {
                 console.error('Error creating producto:', error);
             }
@@ -88,7 +100,7 @@ const Products: React.FC = () => {
 
     const handleDelete = async (id: string): Promise<void> => {
         try {
-            await axios.delete(`http://localhost:5000/api/v1/product/delete/${id}`);
+            await axios.delete(`http://localhost:5000/api/v1/product/delete/${id}`, { withCredentials: true });
             fetchProductos();
         } catch (error) {
             console.error('Error deleting producto:', error);
@@ -106,8 +118,13 @@ const Products: React.FC = () => {
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<{ name?: string; value: unknown }>): void => {
         const { name, value } = event.target;
+        // setSelectedProducto(prevProducto => prevProducto ? { ...prevProducto, [name as string]: value } : null);
         setSelectedProducto(prevProducto => prevProducto ? { ...prevProducto, [name as string]: value } : null);
+        // setSelectedProducto(prevProducto => prevProducto ? { ...prevProducto, [name as string]: { ...emptyProducto, [name]: value } } : null);
+        // setSelectedProducto(prevProducto => prevProducto ? { ...prevProducto, [name as string]: value } : null);
     };
+
+    // console.log('productos:', producto.category);
 
     return (
         <Container>
@@ -134,7 +151,8 @@ const Products: React.FC = () => {
                                     <TableCell>{producto.name}</TableCell>
                                     <TableCell>{producto.description}</TableCell>
                                     <TableCell>{producto.price}</TableCell>
-                                    <TableCell>{categorias.find(categoria => categoria._id === producto.category)?.nombre || 'N/A'}</TableCell>
+                                    <TableCell>{producto.category}</TableCell>
+                                    {/* <TableCell>{categorias.find(categoria => categoria._id === producto.category)?.name || 'N/A'}</TableCell> */}
                                     <TableCell>
                                         <Button variant="contained" color="success" size="small">{producto.status ? 'Activo' : 'Inactivo'}</Button>
                                     </TableCell>
@@ -199,7 +217,7 @@ const Products: React.FC = () => {
                         onChange={handleInputChange}
                     >
                         {categorias.map(categoria => (
-                            <MenuItem key={categoria._id} value={categoria._id}>{categoria.nombre}</MenuItem>
+                            <MenuItem key={categoria.id} value={categoria.id}>{categoria.name}</MenuItem>
                         ))}
                     </Select>
                     <TextField
