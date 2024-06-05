@@ -1,4 +1,3 @@
-// import React, { useState, useEffect } from 'react';
 import {
     Container, TextField, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Box, IconButton, Dialog, DialogTitle, DialogContent, DialogActions, TablePagination, Select, MenuItem,
     FormControlLabel,
@@ -7,7 +6,6 @@ import {
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { ProductHook } from '../../../hook/ProductHook';
-// import { ProductHook } from '../../../hook/ProductHook';
 
 
 const Products: React.FC = () => {
