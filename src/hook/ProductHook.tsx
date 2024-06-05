@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { reqResApi } from "../api/reqRes";
 import Swal from "sweetalert2";
+import { SelectChangeEvent } from "@mui/material";
 
 interface Categoria {
   id: string;
@@ -172,7 +173,7 @@ export const ProductHook = () => {
 
   const handleInputChange = (
     event:
-      | React.ChangeEvent<HTMLInputElement>
+      | SelectChangeEvent<string>
       | React.ChangeEvent<{ name?: string; value: unknown }>
   ): void => {
     const { name, value } = event.target;
