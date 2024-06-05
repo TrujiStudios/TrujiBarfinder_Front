@@ -93,7 +93,7 @@ const Products: React.FC = () => {
                   <TableRow key={producto._id}>
                     <TableCell>{producto.name}</TableCell>
                     <TableCell>{producto.description}</TableCell>
-                    <TableCell>{producto.price}</TableCell>
+                    <TableCell>$ {producto.price}</TableCell>
                     <TableCell>{producto.category[1]}</TableCell>
                     {/* <TableCell>{categorias.find(categoria => categoria._id === producto.category)?.name || 'N/A'}</TableCell> */}
                     <TableCell>
