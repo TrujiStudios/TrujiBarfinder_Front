@@ -86,14 +86,16 @@ export const CategoryHook = () => {
                 cancelButtonText: "No, cancelar!",
                 reverseButtons: true
             }).then((result) => {
+                reqResApi.delete<Category>(`/product/category/delete/${id}`, { withCredentials: true });
+                fetchCategorias();
                 if (result.isConfirmed) {
+                    fetchCategorias();
                     swalWithBootstrapButtons.fire({
                         title: "¡Eliminado!",
                         text: "Su archivo ha sido eliminado.",
                         icon: "success"
+
                     });
-                    reqResApi.delete<Category>(`/product/category/delete/${id}`, { withCredentials: true });
-                    fetchCategorias();
                 } else if (
                     /* Read more about handling dismissals below */
                     result.dismiss === Swal.DismissReason.cancel
