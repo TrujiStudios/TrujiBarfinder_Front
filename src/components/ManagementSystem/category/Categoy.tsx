@@ -5,9 +5,10 @@ import {
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import axios from 'axios';
+import { Switch, FormControlLabel } from '@mui/material';
 
 interface Categoria {
-    _id: string;
+    id: string;
     name: string;
     description: string;
     status: boolean;
@@ -52,13 +53,14 @@ const TablaCategorias: React.FC = () => {
     const handleSave = async (): Promise<void> => {
         if (editMode && selectedCategoria) {
             try {
-                await axios.put(`http://localhost:5000/api/v1/product/category/update/${selectedCategoria._id}`, selectedCategoria);
+                await axios.put(`http://localhost:5000/api/v1/product/category/update/${selectedCategoria.id}`, selectedCategoria, { withCredentials: true });
             } catch (error) {
                 console.error('Error updating categoria:', error);
             }
         } else {
             try {
-                await axios.post('http://localhost:5000/api/v1/product/category/create', selectedCategoria);
+                console.log("NUEVA CATEGORIA", selectedCategoria);
+                await axios.post('http://localhost:5000/api/v1/product/category/create', selectedCategoria, { withCredentials: true });
             } catch (error) {
                 console.error('Error creating categoria:', error);
             }
@@ -87,7 +89,12 @@ const TablaCategorias: React.FC = () => {
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
         const { name, value } = event.target;
-        setSelectedCategoria(prevCategoria => prevCategoria ? { ...prevCategoria, [name]: value } : null);
+        // setSelectedCategoria(prevCategoria => prevCategoria ? { ...prevCategoria, [name]: value } : null);
+        setSelectedCategoria(prevCategoria => prevCategoria ? { ...prevCategoria, [name]: value } : { [name]: value } as Categoria);
+    };
+
+    const handleStatusChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+        setSelectedCategoria(prevCategoria => prevCategoria ? { ...prevCategoria, status: event.target.checked } : { status: event.target.checked } as Categoria);
     };
 
     console.log("Categorias <>", categorias);
@@ -111,7 +118,7 @@ const TablaCategorias: React.FC = () => {
                         </TableHead>
                         <TableBody>
                             {categorias.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((categoria) => (
-                                <TableRow key={categoria._id}>
+                                <TableRow key={categoria.id}>
                                     <TableCell>
                                         <Box display="flex" alignItems="center">
                                             <img src={categoria.imagen} alt={categoria.name} style={{ width: 50, height: 50, marginRight: 16 }} />
@@ -120,13 +127,15 @@ const TablaCategorias: React.FC = () => {
                                     </TableCell>
                                     <TableCell>{categoria.description}</TableCell>
                                     <TableCell>
-                                        <Button variant="contained" color="success" size="small">{categoria.status ? 'Activo' : 'Innactivo'}</Button>
+                                        <Button variant="contained" color={categoria.status ? "success" : "error"} size="small">
+                                            {categoria.status ? 'Activo' : 'Inactivo'}
+                                        </Button>
                                     </TableCell>
                                     <TableCell align="right">
                                         <IconButton color="primary" onClick={() => handleOpenModal(categoria)}>
                                             <EditIcon />
                                         </IconButton>
-                                        <IconButton color="error" onClick={() => handleDelete(categoria._id)}>
+                                        <IconButton color="error" onClick={() => handleDelete(categoria.id)}>
                                             <DeleteIcon />
                                         </IconButton>
                                     </TableCell>
@@ -153,7 +162,7 @@ const TablaCategorias: React.FC = () => {
                         autoFocus
                         margin="dense"
                         label="Nombre"
-                        name="nombre"
+                        name="name"
                         fullWidth
                         defaultValue={selectedCategoria?.name || ''}
                         onChange={handleInputChange}
@@ -161,18 +170,20 @@ const TablaCategorias: React.FC = () => {
                     <TextField
                         margin="dense"
                         label="Descripción"
-                        name="descripcion"
+                        name="description"
                         fullWidth
                         defaultValue={selectedCategoria?.description || ''}
                         onChange={handleInputChange}
                     />
-                    <TextField
-                        margin="dense"
+                    <FormControlLabel
+                        control={
+                            <Switch
+                                checked={selectedCategoria?.status || false}
+                                onChange={handleStatusChange}
+                                name="status"
+                            />
+                        }
                         label="Estado"
-                        name="estado"
-                        fullWidth
-                        defaultValue={selectedCategoria?.status || ''}
-                        onChange={handleInputChange}
                     />
                     <TextField
                         margin="dense"
