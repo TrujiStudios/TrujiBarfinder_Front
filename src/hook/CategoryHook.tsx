@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { reqResApi } from '../api/reqRes';
 
@@ -36,7 +35,6 @@ export const CategoryHook = () => {
 
     const fetchCategorias = async (): Promise<void> => {
         try {
-            // const results = await axios.get('http://localhost:5000/api/v1/product/category/get', { withCredentials: true });
             const results = await reqResApi.get<Category[]>('/product/category/get', { withCredentials: true });
             setCategorias(results.data);
         } catch (error) {
@@ -58,7 +56,6 @@ export const CategoryHook = () => {
     const handleSave = async (): Promise<void> => {
         if (editMode && selectedCategoria) {
             try {
-                // await axios.put(`http://localhost:5000/api/v1/product/category/update/${selectedCategoria.id}`, selectedCategoria, { withCredentials: true });
                 await reqResApi.put<Category>(`/product/category/update/${selectedCategoria.id}`, selectedCategoria, { withCredentials: true });
 
             } catch (error) {
@@ -67,7 +64,6 @@ export const CategoryHook = () => {
         } else {
             try {
                 console.log("NUEVA CATEGORIA", selectedCategoria);
-                // await axios.post('http://localhost:5000/api/v1/product/category/create', selectedCategoria, { withCredentials: true });
                 await reqResApi.post<Category>('/product/category/create', selectedCategoria, { withCredentials: true });
             } catch (error) {
                 console.error('Error creating categoria:', error);
@@ -79,7 +75,6 @@ export const CategoryHook = () => {
 
     const handleDelete = async (id: string): Promise<void> => {
         try {
-            // await axios.delete(`http://localhost:5000/api/v1/product/category/delete/${id}`, { withCredent7ials: true });
             await reqResApi.delete<Category>(`/product/category/delete/${id}`, { withCredentials: true });
             fetchCategorias();
         } catch (error) {
@@ -106,7 +101,6 @@ export const CategoryHook = () => {
         setSelectedCategoria(prevCategoria => prevCategoria ? { ...prevCategoria, status: event.target.checked } : { status: event.target.checked } as Category);
 
     }
-    // console.log("Categorias <>", categorias);
 
     return {
         categorias,
