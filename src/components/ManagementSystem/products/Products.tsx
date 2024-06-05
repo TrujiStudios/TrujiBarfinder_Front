@@ -104,7 +104,6 @@ const Products: React.FC = () => {
                       >
                         {producto.status ? "Activo" : "Inactivo"}
                       </Button>
-                      {/* <Button variant="contained" color="success" size="small">{producto.status ? 'Activo' : 'Inactivo'}</Button> */}
                     </TableCell>
                     <TableCell align="right">
                       <IconButton
