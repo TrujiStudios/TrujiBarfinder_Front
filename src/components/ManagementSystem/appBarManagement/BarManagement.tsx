@@ -4,11 +4,11 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useAuth } from "../../../AuthContext";
+// import { useAuth } from "../../../AuthContext";
 import axios from "axios";
 
 function BarManagement() {
-  const { logout } = useAuth();
+  // const { logout } = useAuth();
 
   const handleLogout = () => {
     axios.post("http://localhost:5000/api/v1/auth/logout", {}, { withCredentials: true });
@@ -30,9 +30,22 @@ function BarManagement() {
               <Nav.Link as={Link} to="/dashboard/vender">
                 Vender
               </Nav.Link>
-              <Nav.Link as={Link} to="/dashboard/product">
-                productos
-              </Nav.Link>
+
+              <NavDropdown title="Productos" id="basic-nav-dropdown">
+                <NavDropdown.Item as={Link} to='/dashboard/category' >Categorias</NavDropdown.Item>
+                <NavDropdown.Item as={Link} to='/dashboard/product' >
+                  Productos
+                </NavDropdown.Item>
+                <NavDropdown.Item href="#action/3.3">
+                  Promociones
+                </NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item href="#action/3.4">
+                  inventario
+                </NavDropdown.Item>
+              </NavDropdown>
+
+
               <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">
