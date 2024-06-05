@@ -79,7 +79,7 @@ const TablaCategorias: React.FC = () => {
 
     const handleDelete = async (id: string): Promise<void> => {
         try {
-            await axios.delete(`http://localhost:5000/api/v1/product/category/delete/${id}`);
+            await axios.delete(`http://localhost:5000/api/v1/product/category/delete/${id}`, { withCredentials: true });
             fetchCategorias();
         } catch (error) {
             console.error('Error deleting categoria:', error);
