@@ -79,7 +79,8 @@ export const CategoryHook = () => {
 
     const handleDelete = async (id: string): Promise<void> => {
         try {
-            await axios.delete(`http://localhost:5000/api/v1/product/category/delete/${id}`, { withCredentials: true });
+            // await axios.delete(`http://localhost:5000/api/v1/product/category/delete/${id}`, { withCredent7ials: true });
+            await reqResApi.delete<Category>(`/product/category/delete/${id}`, { withCredentials: true });
             fetchCategorias();
         } catch (error) {
             console.error('Error deleting categoria:', error);
