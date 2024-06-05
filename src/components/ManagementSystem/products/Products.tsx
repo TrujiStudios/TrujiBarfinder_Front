@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import {
-    Container, TextField, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Box, IconButton, Dialog, DialogTitle, DialogContent, DialogActions, TablePagination, Select, MenuItem
+    Container, TextField, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Box, IconButton, Dialog, DialogTitle, DialogContent, DialogActions, TablePagination, Select, MenuItem,
+    FormControlLabel,
+    Switch
 } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -136,8 +138,15 @@ const Products: React.FC = () => {
 
     // console.log('productos:', producto.category);
 
+    const handleStatusChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+        setSelectedProducto(prevProducto => prevProducto ? { ...prevProducto, status: event.target.checked } : { status: event.target.checked } as Producto);
+        // setSelectedCategoria(prevCategoria => prevCategoria ? { ...prevCategoria, status: event.target.checked } : { status: event.target.checked } as Category);
+
+    }
+
     return (
         <Container>
+            <h2>Productos</h2>
 
             <Box mt={10} display="flex" justifyContent="space-between" alignItems="center" mb={2}>
                 <TextField label="Buscar:" variant="outlined" size="small" />
@@ -165,7 +174,14 @@ const Products: React.FC = () => {
                                     <TableCell>{producto.category[1]}</TableCell>
                                     {/* <TableCell>{categorias.find(categoria => categoria._id === producto.category)?.name || 'N/A'}</TableCell> */}
                                     <TableCell>
-                                        <Button variant="contained" color="success" size="small">{producto.status ? 'Activo' : 'Inactivo'}</Button>
+                                        <Button
+                                            variant="contained"
+                                            color={producto.status ? 'success' : 'error'}
+                                            size="small"
+                                        >
+                                            {producto.status ? 'Activo' : 'Inactivo'}
+                                        </Button>
+                                        {/* <Button variant="contained" color="success" size="small">{producto.status ? 'Activo' : 'Inactivo'}</Button> */}
                                     </TableCell>
                                     <TableCell align="right">
                                         <IconButton color="primary" onClick={() => handleOpenModal(producto)}>
@@ -247,6 +263,18 @@ const Products: React.FC = () => {
                         defaultValue={selectedProducto?.code || ''}
                         onChange={handleInputChange}
                     />
+
+                    <FormControlLabel
+                        control={
+                            <Switch
+                                checked={selectedProducto?.status || false}
+                                onChange={handleStatusChange}
+                                name="status"
+                            />
+                        }
+                        label="Estado"
+                    />
+
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleCloseModal} color="primary">Cancelar</Button>
