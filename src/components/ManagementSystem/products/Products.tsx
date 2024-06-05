@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {
-    Container, TextField, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, Paper, Box, IconButton, Dialog, DialogTitle, DialogContent, DialogActions, TablePagination, Select, MenuItem
+    Container, TextField, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Box, IconButton, Dialog, DialogTitle, DialogContent, DialogActions, TablePagination, Select, MenuItem
 } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -117,7 +117,7 @@ const Products: React.FC = () => {
         }
     };
 
-    const handleChangePage = (event: unknown, newPage: number): void => {
+    const handleChangePage = (newPage: number): void => {
         setPage(newPage);
     };
 
@@ -138,6 +138,7 @@ const Products: React.FC = () => {
 
     return (
         <Container>
+
             <Box mt={10} display="flex" justifyContent="space-between" alignItems="center" mb={2}>
                 <TextField label="Buscar:" variant="outlined" size="small" />
                 <Button variant="contained" color="secondary" onClick={() => handleOpenModal()}>Nuevo</Button>
@@ -223,7 +224,7 @@ const Products: React.FC = () => {
                         label="Categoría"
                         name="category"
                         fullWidth
-                        value={selectedProducto?.category[0].join(', ') || ''}
+                        value={selectedProducto?.category[0]}
                         onChange={handleInputChange}
                     >
                         {categorias.map(categoria => (
