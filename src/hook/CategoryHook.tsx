@@ -67,7 +67,8 @@ export const CategoryHook = () => {
         } else {
             try {
                 console.log("NUEVA CATEGORIA", selectedCategoria);
-                await axios.post('http://localhost:5000/api/v1/product/category/create', selectedCategoria, { withCredentials: true });
+                // await axios.post('http://localhost:5000/api/v1/product/category/create', selectedCategoria, { withCredentials: true });
+                await reqResApi.post<Category>('/product/category/create', selectedCategoria, { withCredentials: true });
             } catch (error) {
                 console.error('Error creating categoria:', error);
             }
