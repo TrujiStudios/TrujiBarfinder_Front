@@ -132,7 +132,7 @@ const TablaCategorias: React.FC = () => {
           count={categorias.length}
           rowsPerPage={rowsPerPage}
           page={page}
-          onPageChange={handleChangePage}
+          onPageChange={(_event, newPage) => handleChangePage(newPage)}
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </Paper>
