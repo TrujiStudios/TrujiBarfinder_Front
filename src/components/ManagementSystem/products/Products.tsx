@@ -130,7 +130,7 @@ const Products: React.FC = () => {
           count={productos.length}
           rowsPerPage={rowsPerPage}
           page={page}
-          onPageChange={handleChangePage}
+          onPageChange={(event, newPage) => handleChangePage(newPage)}
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </Paper>
