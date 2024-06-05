@@ -68,8 +68,9 @@ const Products: React.FC = () => {
         }
     };
 
+
     const handleOpenModal = (producto: Producto | null = null): void => {
-        setSelectedProducto(producto ?? emptyProducto);
+        setSelectedProducto(producto || emptyProducto);
         setEditMode(producto !== null);
         setOpenModal(true);
     };
@@ -82,7 +83,16 @@ const Products: React.FC = () => {
     const handleSave = async (): Promise<void> => {
         if (editMode && selectedProducto) {
             try {
-                await axios.put(`http://localhost:5000/api/v1/product/update/${selectedProducto._id}`, selectedProducto);
+
+                if (selectedProducto) {
+                    const productoToSend = {
+                        ...selectedProducto,
+                        category: selectedProducto.category[0]
+                    };
+                    await axios.put(`http://localhost:5000/api/v1/product/update/${selectedProducto._id}`, productoToSend, { withCredentials: true });
+                }
+
+
             } catch (error) {
                 console.error('Error updating producto:', error);
             }
@@ -151,7 +161,7 @@ const Products: React.FC = () => {
                                     <TableCell>{producto.name}</TableCell>
                                     <TableCell>{producto.description}</TableCell>
                                     <TableCell>{producto.price}</TableCell>
-                                    <TableCell>{producto.category}</TableCell>
+                                    <TableCell>{producto.category[1]}</TableCell>
                                     {/* <TableCell>{categorias.find(categoria => categoria._id === producto.category)?.name || 'N/A'}</TableCell> */}
                                     <TableCell>
                                         <Button variant="contained" color="success" size="small">{producto.status ? 'Activo' : 'Inactivo'}</Button>
@@ -213,7 +223,7 @@ const Products: React.FC = () => {
                         label="Categoría"
                         name="category"
                         fullWidth
-                        value={selectedProducto?.category || ''}
+                        value={selectedProducto?.category[0].join(', ') || ''}
                         onChange={handleInputChange}
                     >
                         {categorias.map(categoria => (
