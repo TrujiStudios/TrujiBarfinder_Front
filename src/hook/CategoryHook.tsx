@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Swal from 'sweetalert2'
 import { reqResApi } from '../api/reqRes';
 import { Category } from '../interface/categoryInterface';
 
@@ -68,8 +69,47 @@ export const CategoryHook = () => {
 
     const handleDelete = async (id: string): Promise<void> => {
         try {
-            await reqResApi.delete<Category>(`/product/category/delete/${id}`, { withCredentials: true });
+
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: "btn btn-success   ",
+                    cancelButton: "btn btn-danger"
+                },
+                buttonsStyling: false  // esta liena 
+            });
+            swalWithBootstrapButtons.fire({
+                title: "Seguro que desea eliminar?",
+                text: "La información que elimine no podrá ser recuperada.!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Si, eliminar!        ",
+                cancelButtonText: "No, cancelar!",
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    swalWithBootstrapButtons.fire({
+                        title: "¡Eliminado!",
+                        text: "Su archivo ha sido eliminado.",
+                        icon: "success"
+                    });
+                    reqResApi.delete<Category>(`/product/category/delete/${id}`, { withCredentials: true });
+                    fetchCategorias();
+                } else if (
+                    /* Read more about handling dismissals below */
+                    result.dismiss === Swal.DismissReason.cancel
+                ) {
+                    swalWithBootstrapButtons.fire({
+                        title: "Cancelled",
+                        text: "Your imaginary file is safe :)",
+                        icon: "error"
+                    });
+                }
+            });
+
             fetchCategorias();
+
+
+            // await reqResApi.delete<Category>(`/product/category/delete/${id}`, { withCredentials: true });
         } catch (error) {
             console.error('Error deleting categoria:', error);
         }
