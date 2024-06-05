@@ -1,14 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { reqResApi } from '../api/reqRes';
+import { Category } from '../interface/categoryInterface';
 
 
-interface Category {
-    id: string;
-    name: string;
-    description: string;
-    status: boolean;
-    imagen: string;
-}
+
 
 const emptyCategoria: Category = {
     id: '',
@@ -82,7 +77,7 @@ export const CategoryHook = () => {
         }
     };
 
-    const handleChangePage = (event: unknown, newPage: number): void => {
+    const handleChangePage = (newPage: number): void => {
         setPage(newPage);
     }
 
