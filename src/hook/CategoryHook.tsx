@@ -36,9 +36,9 @@ export const CategoryHook = () => {
 
     const fetchCategorias = async (): Promise<void> => {
         try {
-            const response = await axios.get('http://localhost:5000/api/v1/product/category/get', { withCredentials: true });
-            setCategorias(response.data);
-            console.log("Data", response.data);
+            // const results = await axios.get('http://localhost:5000/api/v1/product/category/get', { withCredentials: true });
+            const results = await reqResApi.get<Category[]>('/product/category/get', { withCredentials: true });
+            setCategorias(results.data);
         } catch (error) {
             console.error('Error fetching categorias:', error);
         }
