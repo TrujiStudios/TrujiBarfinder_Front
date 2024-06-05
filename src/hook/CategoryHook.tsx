@@ -89,23 +89,23 @@ export const CategoryHook = () => {
 
     const handleChangePage = (event: unknown, newPage: number): void => {
         setPage(newPage);
-    };
+    }
 
     const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>): void => {
         setRowsPerPage(parseInt(event.target.value, 10));
         setPage(0);
-    };
+    }
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
         const { name, value } = event.target;
         // setSelectedCategoria(prevCategoria => prevCategoria ? { ...prevCategoria, [name]: value } : null);
         setSelectedCategoria(prevCategoria => prevCategoria ? { ...prevCategoria, [name]: value } : { [name]: value } as Category);
-    };
 
+    }
     const handleStatusChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
         setSelectedCategoria(prevCategoria => prevCategoria ? { ...prevCategoria, status: event.target.checked } : { status: event.target.checked } as Category);
-    };
 
+    }
     // console.log("Categorias <>", categorias);
 
     return {
@@ -123,6 +123,7 @@ export const CategoryHook = () => {
         handleChangeRowsPerPage,
         handleInputChange,
         handleStatusChange
-    }
 
-}
+
+    }
+}        
