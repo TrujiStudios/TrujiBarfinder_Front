@@ -15,6 +15,14 @@ interface Categoria {
     imagen: string;
 }
 
+const emptyCategoria: Categoria = {
+    id: '',
+    name: '',
+    description: '',
+    status: false,
+    imagen: '',
+};
+
 const initialCategorias: Categoria[] = [];
 
 const TablaCategorias: React.FC = () => {
@@ -40,14 +48,14 @@ const TablaCategorias: React.FC = () => {
     };
 
     const handleOpenModal = (categoria: Categoria | null = null): void => {
-        setSelectedCategoria(categoria);
+        setSelectedCategoria(categoria ?? emptyCategoria);
         setEditMode(categoria !== null);
         setOpenModal(true);
     };
 
     const handleCloseModal = (): void => {
         setOpenModal(false);
-        setSelectedCategoria(null);
+        setSelectedCategoria(emptyCategoria);
     };
 
     const handleSave = async (): Promise<void> => {
