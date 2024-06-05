@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
+import { reqResApi } from '../api/reqRes';
 
 
 
@@ -50,7 +51,8 @@ export const ProductHook = () => {
 
     const fetchProductos = async (): Promise<void> => {
         try {
-            const response = await axios.get('http://localhost:5000/api/v1/product/get', { withCredentials: true });
+            // const response = await axios.get('http://localhost:5000/api/v1/product/get', { withCredentials: true });
+            const response = await reqResApi.get('/product/get', { withCredentials: true });
             setProductos(response.data);
         } catch (error) {
             console.error('Error fetching productos:', error);
@@ -59,7 +61,8 @@ export const ProductHook = () => {
 
     const fetchCategorias = async (): Promise<void> => {
         try {
-            const response = await axios.get('http://localhost:5000/api/v1/product/category/get', { withCredentials: true });
+            // const response = await axios.get('http://localhost:5000/api/v1/product/category/get', { withCredentials: true });
+            const response = await reqResApi.get('/product/category/get', { withCredentials: true });
             setCategorias(response.data);
         } catch (error) {
             console.error('Error fetching categorias:', error);
@@ -87,7 +90,8 @@ export const ProductHook = () => {
                         ...selectedProducto,
                         category: selectedProducto.category[0]
                     };
-                    await axios.put(`http://localhost:5000/api/v1/product/update/${selectedProducto._id}`, productoToSend, { withCredentials: true });
+                    // await axios.put(`http://localhost:5000/api/v1/product/update/${selectedProducto._id}`, productoToSend, { withCredentials: true });
+                    await reqResApi.put(`/product/update/${selectedProducto._id}`, productoToSend, { withCredentials: true });
                 }
 
 
@@ -97,7 +101,8 @@ export const ProductHook = () => {
         } else {
             try {
                 console.log("NUEVO PRODUCTO", selectedProducto);
-                await axios.post('http://localhost:5000/api/v1/product/create', selectedProducto, { withCredentials: true });
+                // await axios.post('http://localhost:5000/api/v1/product/create', selectedProducto, { withCredentials: true });
+                await reqResApi.post('/product/create', selectedProducto, { withCredentials: true });
             } catch (error) {
                 console.error('Error creating producto:', error);
             }
@@ -108,7 +113,8 @@ export const ProductHook = () => {
 
     const handleDelete = async (id: string): Promise<void> => {
         try {
-            await axios.delete(`http://localhost:5000/api/v1/product/delete/${id}`, { withCredentials: true });
+            // await axios.delete(`http://localhost:5000/api/v1/product/delete/${id}`, { withCredentials: true });
+            await reqResApi.delete(`/product/delete/${id}`, { withCredentials: true });
             fetchProductos();
         } catch (error) {
             console.error('Error deleting producto:', error);
