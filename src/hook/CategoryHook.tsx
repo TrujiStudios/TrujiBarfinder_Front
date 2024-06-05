@@ -87,7 +87,8 @@ export const CategoryHook = () => {
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
         const { name, value } = event.target;
         // setSelectedCategoria(prevCategoria => prevCategoria ? { ...prevCategoria, [name]: value } : null);
-        setSelectedCategoria(prevCategoria => prevCategoria ? { ...prevCategoria, [name]: value } : { [name]: value } as Category);
+        // setSelectedCategoria(prevCategoria => prevCategoria ? { ...prevCategoria, [name]: value } : { [name]: value } as Category);
+        setSelectedCategoria(prevCategoria => prevCategoria ? { ...prevCategoria, [name]: value } : { ...emptyCategoria, [name]: value });
 
     }
     const handleStatusChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
