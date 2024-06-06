@@ -223,7 +223,15 @@ const Mesas = () => {
           Nueva
         </Button>
       </Box>
-      <p>{message.toString()}</p>
+      <p
+        style={{
+          fontFamily: "monospace",
+          fontWeight: "bold",
+          fontSize: "18px"
+        }}
+      >
+        {message.toString()}
+      </p>
       <Paper
         elevation={2}
         style={{
