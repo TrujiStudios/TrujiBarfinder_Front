@@ -15,7 +15,8 @@ import {
   FormControl,
   FormControlLabel,
   Checkbox,
-  TablePagination
+  TablePagination,
+  Grid
 } from "@mui/material";
 
 // Definición del tipo para Mesa
@@ -176,71 +177,89 @@ const Mesas = () => {
   };
 
   return (
-    <div>
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={() => handleOpenModal()}
+    <Box
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+      flexDirection="column"
+    >
+      <Box mt={2} mb={2}>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => handleOpenModal()}
+        >
+          Nueva
+        </Button>
+      </Box>
+      <Paper
+        elevation={3}
+        style={{
+          padding: "20px",
+          borderRadius: "10px",
+          border: "1px solid #ccc",
+          width: "80%"
+        }}
       >
-        Nueva
-      </Button>
-      <TableContainer component={Paper}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>Nombre</TableCell>
-              <TableCell>Descripción</TableCell>
-              <TableCell>Estado</TableCell>
-              <TableCell>Imagen</TableCell>
-              <TableCell>Acciones</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {mesas
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((mesa) => (
-                <TableRow key={mesa._id}>
-                  <TableCell>{mesa.name}</TableCell>
-                  <TableCell>{mesa.description}</TableCell>
-                  <TableCell>{mesa.status ? "Activo" : "Inactivo"}</TableCell>
-                  <TableCell>
-                    <img
-                      src={mesa.image}
-                      alt={mesa.name}
-                      width="50"
-                      height="50"
-                    />
-                  </TableCell>
-                  <TableCell>
-                    <Button
-                      variant="contained"
-                      color="warning"
-                      onClick={() => handleOpenModal(mesa)}
-                    >
-                      Editar
-                    </Button>
-                    <Button
-                      variant="contained"
-                      color="error"
-                      onClick={() => deleteMesa(mesa._id)}
-                    >
-                      Eliminar
-                    </Button>
-                  </TableCell>
-                </TableRow>
-              ))}
-          </TableBody>
-        </Table>
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
-          component="div"
-          count={mesas.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
-      </TableContainer>
+        <TableContainer>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Nombre</TableCell>
+                <TableCell>Descripción</TableCell>
+                <TableCell>Estado</TableCell>
+                <TableCell>Imagen</TableCell>
+                <TableCell>Acciones</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {mesas
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((mesa) => (
+                  <TableRow key={mesa._id}>
+                    <TableCell>{mesa.name}</TableCell>
+                    <TableCell>{mesa.description}</TableCell>
+                    <TableCell>{mesa.status ? "Activo" : "Inactivo"}</TableCell>
+                    <TableCell>
+                      <img
+                        src={mesa.image}
+                        alt={mesa.name}
+                        width="50"
+                        height="50"
+                      />
+                    </TableCell>
+                    <TableCell>
+                      <Button
+                        variant="contained"
+                        color="warning"
+                        onClick={() => handleOpenModal(mesa)}
+                        style={{ marginRight: "10px" }}
+                      >
+                        Editar
+                      </Button>
+                      <Button
+                        variant="contained"
+                        color="error"
+                        onClick={() => deleteMesa(mesa._id)}
+                      >
+                        Eliminar
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                ))}
+            </TableBody>
+          </Table>
+          <TablePagination
+            rowsPerPageOptions={[5, 10, 25]}
+            component="div"
+            count={mesas.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+          />
+        </TableContainer>
+      </Paper>
 
       <Modal
         open={showModal}
@@ -296,7 +315,7 @@ const Mesas = () => {
           </form>
         </Box>
       </Modal>
-    </div>
+    </Box>
   );
 };
 
