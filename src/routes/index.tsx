@@ -14,6 +14,8 @@ import Products from "../components/ManagementSystem/products/Products";
 import ProtectedRoute from "../ProtectedRoute";
 import { Dashboard } from "../components/ManagementSystem/Dashboard";
 import Category from "../components/ManagementSystem/category/Category";
+import Table from "../components/ManagementSystem/tables/Table";
+import Mesas from "../components/ManagementSystem/tables/Example";
 
 const router = createBrowserRouter([
   {
@@ -58,7 +60,14 @@ const router = createBrowserRouter([
         path: "category",
         element: <Category />
       },
-
+      {
+        path: "tables",
+        element: <Table />
+      },
+      {
+        path: "tablesdos",
+        element: <Mesas />
+      }
     ]
   }
 ]);

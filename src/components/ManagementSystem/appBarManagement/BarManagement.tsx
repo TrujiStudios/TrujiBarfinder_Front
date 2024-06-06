@@ -11,7 +11,11 @@ function BarManagement() {
   // const { logout } = useAuth();
 
   const handleLogout = () => {
-    axios.post("http://localhost:5000/api/v1/auth/logout", {}, { withCredentials: true });
+    axios.post(
+      "http://localhost:5000/api/v1/auth/logout",
+      {},
+      { withCredentials: true }
+    );
     // logout();
   };
   return (
@@ -32,8 +36,10 @@ function BarManagement() {
               </Nav.Link>
 
               <NavDropdown title="Productos" id="basic-nav-dropdown">
-                <NavDropdown.Item as={Link} to='/dashboard/category' >Categorias</NavDropdown.Item>
-                <NavDropdown.Item as={Link} to='/dashboard/product' >
+                <NavDropdown.Item as={Link} to="/dashboard/category">
+                  Categorias
+                </NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/dashboard/product">
                   Productos
                 </NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.3">
@@ -45,6 +51,29 @@ function BarManagement() {
                 </NavDropdown.Item>
               </NavDropdown>
 
+              <NavDropdown title="Configuracion" id="basic-nav-dropdown">
+                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+                <NavDropdown.Item href="#action/3.2">
+                  Información de negocio
+                </NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/dashboard/tablesdos">
+                  Menú digital
+                </NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/dashboard/tables">
+                  Mesas
+                </NavDropdown.Item>
+                <NavDropdown.Item href="#action/3.3">Usuarios</NavDropdown.Item>
+                <NavDropdown.Item href="#action/3.3">
+                  Acceso de usuarios a mesas
+                </NavDropdown.Item>
+                <NavDropdown.Item href="#action/3.3">
+                  Suscribir otro Negocio
+                </NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item href="#action/3.4">
+                  Separated link
+                </NavDropdown.Item>
+              </NavDropdown>
 
               <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
@@ -59,7 +88,6 @@ function BarManagement() {
                   Separated link
                 </NavDropdown.Item>
               </NavDropdown>
-
             </Nav>
             <Nav className="ms-auto">
               <Nav.Link as={Link} to="/signIn" onClick={handleLogout}>
