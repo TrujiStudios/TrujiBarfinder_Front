@@ -19,6 +19,12 @@ import {
   Grid
 } from "@mui/material";
 
+//! falta la imagen
+const DEFAULT_IMAGE_URL =
+  "https://restobar.loggro.com/assets/images/pirpos/pirpos_table_dnd.png";
+// const DEFAULT_IMAGE_URL =
+//   "../../../assets/images/tables/barfinder_table_dnd.png";
+
 // Definición del tipo para Mesa
 interface Mesa {
   _id: string;
@@ -30,13 +36,15 @@ interface Mesa {
 
 const Mesas = () => {
   const [mesas, setMesas] = useState<Mesa[]>([]);
+  const [message, setMessage] = useState<Mesa[]>([]);
   const [showModal, setShowModal] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [selectedMesa, setSelectedMesa] = useState<Mesa | null>(null);
   const [formValues, setFormValues] = useState({
     name: "",
     description: "",
-    status: true
+    status: true,
+    image: DEFAULT_IMAGE_URL
   });
 
   // Función para obtener las mesas
@@ -49,21 +57,42 @@ const Mesas = () => {
         }
       );
       setMesas(response.data.data);
+      setMessage(response.data.message);
     } catch (error) {
       console.error("Error fetching mesas", error);
     }
   };
 
+  // console.log("RESPONSE <>", response);
+
   // Función para manejar la creación de una mesa
+  // const createMesa = async () => {
+  //   try {
+  //     await axios.post(
+  //       "http://localhost:5000/api/v1/tables/create",
+  //       formValues,
+  //       {
+  //         withCredentials: true
+  //       }
+  //     );
+  //     fetchMesas();
+  //     setShowModal(false);
+  //   } catch (error) {
+  //     console.error("Error creating mesa", error);
+  //   }
+  // };
+
   const createMesa = async () => {
     try {
-      await axios.post(
-        "http://localhost:5000/api/v1/tables/create",
-        formValues,
-        {
-          withCredentials: true
-        }
-      );
+      // Asegurarse de que formValues incluya la imagen por defecto si no se ha especificado otra
+      const mesaData = {
+        ...formValues,
+        image: formValues.image || DEFAULT_IMAGE_URL
+      };
+
+      await axios.post("http://localhost:5000/api/v1/tables/create", mesaData, {
+        withCredentials: true
+      });
       fetchMesas();
       setShowModal(false);
     } catch (error) {
@@ -109,7 +138,8 @@ const Mesas = () => {
       setFormValues({
         name: mesa.name,
         description: mesa.description,
-        status: mesa.status
+        status: mesa.status,
+        image: mesa.image
       });
       setIsEditing(true);
     } else {
@@ -117,7 +147,8 @@ const Mesas = () => {
       setFormValues({
         name: "",
         description: "",
-        status: true
+        status: true,
+        image: DEFAULT_IMAGE_URL
       });
       setIsEditing(false);
     }
@@ -192,13 +223,14 @@ const Mesas = () => {
           Nueva
         </Button>
       </Box>
+      <p>{message.toString()}</p>
       <Paper
-        elevation={3}
+        elevation={2}
         style={{
           padding: "20px",
           borderRadius: "10px",
           border: "1px solid #ccc",
-          width: "80%"
+          width: "90%"
         }}
       >
         <TableContainer>
