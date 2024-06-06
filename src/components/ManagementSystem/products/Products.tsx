@@ -170,7 +170,8 @@ const Products: React.FC = () => {
             label="Categoría"
             name="category"
             fullWidth
-            value={selectedProducto?.category[0]}
+            // value={selectedProducto?.category[1]}
+            defaultValue={selectedProducto?.category[0] || ""}
             onChange={handleInputChange}
           >
             {categorias.map((categoria) => (

@@ -88,7 +88,7 @@ export const ProductHook = () => {
         if (selectedProducto) {
           const productoToSend = {
             ...selectedProducto,
-            category: selectedProducto.category[0]
+            category: selectedProducto.category
           };
           await reqResApi.put(
             `/product/update/${selectedProducto._id}`,
