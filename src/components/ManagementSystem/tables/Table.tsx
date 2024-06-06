@@ -18,6 +18,7 @@ import {
   TablePagination,
   Grid
 } from "@mui/material";
+import { styles } from "../../../themes/tableTheme";
 
 //! falta la imagen
 const DEFAULT_IMAGE_URL =
@@ -245,11 +246,13 @@ const Mesas = () => {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>Nombre</TableCell>
-                <TableCell>Descripción</TableCell>
-                <TableCell>Estado</TableCell>
-                <TableCell>Imagen</TableCell>
-                <TableCell>Acciones</TableCell>
+                <TableCell style={styles.tableCellHeader}>Nombre</TableCell>
+                <TableCell style={styles.tableCellHeader}>
+                  Descripción
+                </TableCell>
+                <TableCell style={styles.tableCellHeader}>Estado</TableCell>
+                <TableCell style={styles.tableCellHeader}>Imagen</TableCell>
+                <TableCell style={styles.tableCellHeader}>Acciones</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -257,9 +260,29 @@ const Mesas = () => {
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((mesa) => (
                   <TableRow key={mesa.id}>
-                    <TableCell>{mesa.name}</TableCell>
-                    <TableCell>{mesa.description}</TableCell>
-                    <TableCell>{mesa.status ? "Activo" : "Inactivo"}</TableCell>
+                    <TableCell style={styles.tableCellTable}>
+                      {mesa.name}
+                    </TableCell>
+                    <TableCell style={styles.tableCellTable}>
+                      {mesa.description}
+                    </TableCell>
+                    {/* <TableCell
+                      style={{
+                        ...styles.tableCellTable,
+                        color: mesa.status ? "green" : "red"
+                      }}
+                    >
+                      {mesa.status ? "Activo" : "Inactivo"}
+                    </TableCell> */}
+                    <TableCell>
+                      <Button
+                        variant="contained"
+                        color={mesa.status ? "success" : "error"}
+                        size="small"
+                      >
+                        {mesa.status ? "Activo" : "Inactivo"}
+                      </Button>
+                    </TableCell>
                     <TableCell>
                       <img
                         src={mesa.image}
