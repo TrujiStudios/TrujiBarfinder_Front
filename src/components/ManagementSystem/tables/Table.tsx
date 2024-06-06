@@ -27,7 +27,7 @@ const DEFAULT_IMAGE_URL =
 
 // Definición del tipo para Mesa
 interface Mesa {
-  _id: string;
+  id: string;
   name: string;
   description: string;
   status: boolean;
@@ -105,7 +105,7 @@ const Mesas = () => {
     if (selectedMesa) {
       try {
         await axios.put(
-          `http://localhost:5000/api/v1/tables/update/${selectedMesa._id}`,
+          `http://localhost:5000/api/v1/tables/update/${selectedMesa.id}`,
           formValues,
           {
             withCredentials: true
@@ -182,7 +182,7 @@ const Mesas = () => {
 
   // Paginación
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
 
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
@@ -248,7 +248,7 @@ const Mesas = () => {
               {mesas
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((mesa) => (
-                  <TableRow key={mesa._id}>
+                  <TableRow key={mesa.id}>
                     <TableCell>{mesa.name}</TableCell>
                     <TableCell>{mesa.description}</TableCell>
                     <TableCell>{mesa.status ? "Activo" : "Inactivo"}</TableCell>
@@ -272,7 +272,7 @@ const Mesas = () => {
                       <Button
                         variant="contained"
                         color="error"
-                        onClick={() => deleteMesa(mesa._id)}
+                        onClick={() => deleteMesa(mesa.id)}
                       >
                         Eliminar
                       </Button>
