@@ -266,14 +266,6 @@ const Mesas = () => {
                     <TableCell style={styles.tableCellTable}>
                       {mesa.description}
                     </TableCell>
-                    {/* <TableCell
-                      style={{
-                        ...styles.tableCellTable,
-                        color: mesa.status ? "green" : "red"
-                      }}
-                    >
-                      {mesa.status ? "Activo" : "Inactivo"}
-                    </TableCell> */}
                     <TableCell>
                       <Button
                         variant="contained"
