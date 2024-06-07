@@ -218,8 +218,9 @@ const Mesas = () => {
       <Box mt={2} mb={2}>
         <Button
           variant="contained"
-          color="primary"
+          // color="primary"
           onClick={() => handleOpenModal()}
+          style={styles.ButonNuenva}
         >
           Nueva
         </Button>
@@ -272,7 +273,7 @@ const Mesas = () => {
                         color={mesa.status ? "success" : "error"}
                         size="small"
                       >
-                        {mesa.status ? "Activo" : "Inactivo"}
+                        {mesa.status ? "Activa" : "Inactivo"}
                       </Button>
                     </TableCell>
                     <TableCell>
@@ -286,9 +287,9 @@ const Mesas = () => {
                     <TableCell>
                       <Button
                         variant="contained"
-                        color="warning"
+                        // color="success"
                         onClick={() => handleOpenModal(mesa)}
-                        style={{ marginRight: "10px" }}
+                        style={{ marginRight: "10px", marginBottom: "1px" }}
                       >
                         Editar
                       </Button>

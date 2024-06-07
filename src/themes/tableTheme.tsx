@@ -6,5 +6,13 @@ export const styles = {
   tableCellTable: {
     fontSize: "1em" // 1em
     // fontWeight: "bold"
+  },
+  ButonNuenva: {
+    color: "white",
+    backgroundColor: "#D5023A",
+    "&:hover": {
+      color: "black",
+      backgroundColor: "#C7C1D3"
+    }
   }
 };

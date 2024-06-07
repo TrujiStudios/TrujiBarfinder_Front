@@ -6,6 +6,9 @@ import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 // import { useAuth } from "../../../AuthContext";
 import axios from "axios";
+import { styles } from "../../../themes/barMAnagerThemes";
+
+import "./styles.css";
 
 function BarManagement() {
   // const { logout } = useAuth();
@@ -20,36 +23,52 @@ function BarManagement() {
   };
   return (
     <>
-      <Navbar expand="lg" bg="danger">
+      <Navbar expand="lg" style={styles.Headers}>
         <Container>
-          <Navbar.Brand as={Link} to="/dashboard">
+          <Navbar.Brand style={styles.navar} as={Link} to="/dashboard">
             Barfindert360
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link as={Link} to="/dashboard">
+              <Nav.Link style={styles.navar} as={Link} to="/dashboard">
                 Dashboard
               </Nav.Link>
-              <Nav.Link as={Link} to="/dashboard/vender">
+              <Nav.Link style={styles.navar} as={Link} to="/dashboard/vender">
                 Vender
               </Nav.Link>
 
-              <NavDropdown title="Productos" id="basic-nav-dropdown">
-                <NavDropdown.Item as={Link} to="/dashboard/category">
+              {/* Inicio */}
+              <NavDropdown
+                title="Productos"
+                id="basic-nav-dropdown"
+                className="custom-nav-dropdown"
+              >
+                <NavDropdown.Item
+                  // style={styles.navar}
+                  style={styles.navar}
+                  as={Link}
+                  to="/dashboard/category"
+                >
                   Categorias
                 </NavDropdown.Item>
-                <NavDropdown.Item as={Link} to="/dashboard/product">
+                <NavDropdown.Item
+                  style={styles.navar}
+                  as={Link}
+                  to="/dashboard/product"
+                >
                   Productos
                 </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">
+                <NavDropdown.Item style={styles.navar} href="#action/3.3">
                   Promociones
                 </NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4">
+                <NavDropdown.Item style={styles.navar} href="#action/3.4">
                   inventario
                 </NavDropdown.Item>
               </NavDropdown>
+
+              {/* Fin */}
 
               <NavDropdown title="Configuracion" id="basic-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
@@ -74,7 +93,9 @@ function BarManagement() {
                   Separated link
                 </NavDropdown.Item>
               </NavDropdown>
+              {/* Fin */}
 
+              {/* inicio */}
               <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">
@@ -88,6 +109,7 @@ function BarManagement() {
                   Separated link
                 </NavDropdown.Item>
               </NavDropdown>
+              {/* Fin */}
             </Nav>
             <Nav className="ms-auto">
               <Nav.Link as={Link} to="/signIn" onClick={handleLogout}>

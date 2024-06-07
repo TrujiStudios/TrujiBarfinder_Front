@@ -1,0 +1,12 @@
+/* styles.css */
+.custom-nav-dropdown .dropdown-menu {
+  background-color: #0000ff; /* Cambia este color al que prefieras */
+}
+
+.custom-nav-dropdown .dropdown-item {
+  color: white; /* Opcional: Cambiar el color del texto */
+}
+
+.custom-nav-dropdown .dropdown-item:hover {
+  background-color: #45a049; /* Opcional: Cambiar el color de fondo al pasar el ratón */
+}
