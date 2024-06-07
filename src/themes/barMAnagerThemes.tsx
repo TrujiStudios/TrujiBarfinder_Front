@@ -1,10 +1,11 @@
 export const styles = {
   Headers: {
-    backgroundColor: "blue"
+    backgroundColor: "#E5F8E3"
     // color: "white"
   },
   navar: {
-    color: "white"
+    color: "#232D34",
+    fontWeight: "bold"
     // backgroundColor: "blue"
   },
   HeadersChildre: {
