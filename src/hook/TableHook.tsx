@@ -63,13 +63,7 @@ export const TableHook = () => {
     const updateMesa = async () => {
         if (selectedMesa) {
             try {
-                await axios.put(
-                    `http://localhost:5000/api/v1/tables/update/${selectedMesa.id}`,
-                    formValues,
-                    {
-                        withCredentials: true
-                    }
-                );
+                await reqResApi.put<ApiResponse>(`/tables/update/${selectedMesa.id}`, formValues, { withCredentials: true });
                 fetchMesas();
                 setShowModal(false);
             } catch (error) {
@@ -99,9 +93,7 @@ export const TableHook = () => {
                 reverseButtons: true
             }).then((result) => {
 
-                axios.delete(`http://localhost:5000/api/v1/tables/delete/${id}`, {
-                    withCredentials: true
-                });
+                reqResApi.delete<ApiResponse>(`/tables/delete/${id}`, { withCredentials: true });
                 fetchMesas();
 
 
