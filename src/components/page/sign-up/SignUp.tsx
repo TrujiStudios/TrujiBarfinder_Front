@@ -28,6 +28,7 @@ import { reqResApi } from '../../../api/reqRes';
 import { SingUpInterface } from '../../../interface/singUpInterface';
 import Swal from 'sweetalert2'
 import { useNavigate } from 'react-router-dom';
+import { style } from '../../../themes/tableTheme';
 
 
 
@@ -307,7 +308,7 @@ export default function SignUp() {
           sx={{
             position: { xs: 'static', sm: 'fixed' },
             width: '100%',
-            p: { xs: 2, sm: 4 },
+            p: { xs: 2, sm: 4 }, // esta 
           }}
         >
           <Button
@@ -323,6 +324,7 @@ export default function SignUp() {
           justifyContent="center"
           sx={{ height: { xs: '100%', sm: '100dvh' }, p: 2 }}
         >
+
           <Card>
             <SitemarkIcon />
             <Typography
@@ -339,7 +341,7 @@ export default function SignUp() {
             >
               {/* Nombre y apellidos */}
 
-              <Grid container spacing={2}>
+              <Grid container spacing={2} style={{}}>
                 <Grid item xs={12} sm={6}>
                   <FormControl>
                     <FormLabel htmlFor="name">Nombre completo</FormLabel>
@@ -515,8 +517,8 @@ export default function SignUp() {
               </Button>
               <Link
                 to="/signIn"
-                variant="body2"
-                sx={{ alignSelf: 'center' }}
+              // variant="body2"
+              // sx={{ alignSelf: 'center' }}
               >
                 Already have an account? Sign in
               </Link>
@@ -547,6 +549,7 @@ export default function SignUp() {
               </Button>
             </Box>
           </Card>
+
         </Stack>
       </SignUpContainer>
       {/* <ToggleCustomTheme
