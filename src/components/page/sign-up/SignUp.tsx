@@ -7,7 +7,7 @@ import Divider from '@mui/material/Divider';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormLabel from '@mui/material/FormLabel';
 import FormControl from '@mui/material/FormControl';
-import Link from '@mui/material/Link';
+// import Link from '@mui/material/Link';
 import TextField from '@mui/material/TextField';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
@@ -22,9 +22,17 @@ import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
 import getSignUpTheme from './getSignUpTheme';
 import ToggleColorMode from './ToggleColorMode';
 import { GoogleIcon, FacebookIcon, SitemarkIcon } from './CustomIcons';
+import { Link } from "react-router-dom";
+import Grid from '@mui/material/Grid';
+import { reqResApi } from '../../../api/reqRes';
+import { SingUpInterface } from '../../../interface/singUpInterface';
+import Swal from 'sweetalert2'
+import { useNavigate } from 'react-router-dom';
+
+
 
 interface ToggleCustomThemeProps {
-  showCustomTheme: Boolean;
+  showCustomTheme: boolean;
   toggleCustomTheme: () => void;
 }
 
@@ -43,7 +51,7 @@ function ToggleCustomTheme({
         bottom: 24,
       }}
     >
-      <ToggleButtonGroup
+      {/* <ToggleButtonGroup
         color="primary"
         exclusive
         value={showCustomTheme}
@@ -61,7 +69,7 @@ function ToggleCustomTheme({
           Custom theme
         </ToggleButton>
         <ToggleButton value={false}>Material Design 2</ToggleButton>
-      </ToggleButtonGroup>
+      </ToggleButtonGroup> */}
     </Box>
   );
 }
@@ -109,10 +117,34 @@ export default function SignUp() {
   const [nameError, setNameError] = React.useState(false);
   const [nameErrorMessage, setNameErrorMessage] = React.useState('');
 
+  const [LastNameError, setLastNameError] = React.useState(false);
+  const [LastNameErrorMessage, setLastNameErrorMessage] = React.useState('');
+
+  const [phoneError, setPhoneError] = React.useState(false);
+  const [phoneErrorMessage, setPhoneErrorMessage] = React.useState('');
+
+  const [BusinessNameError, setBusinessNameError] = React.useState(false);
+  const [BusinessNameErrorMessage, setBusinessNameErrorMessage] = React.useState('');
+
+  const [countryError, setCountryError] = React.useState(false);
+  const [countryErrorMessage, setCountryErrorMessage] = React.useState('');
+
+  const [businessTypeError, setBusinessTypeError] = React.useState(false);
+  const [businessTypeErrorMessage, setBusinessTypeErrorMessage] = React.useState('');
+
+  const navigate = useNavigate();
+
   const validateInputs = () => {
+
+    const name = document.getElementById('name') as HTMLInputElement;
+    const LastName = document.getElementById('LastName') as HTMLInputElement;
+    const phone = document.getElementById('phone') as HTMLInputElement;
+    const businessName = document.getElementById('businessName') as HTMLInputElement;
+    const country = document.getElementById('country') as HTMLInputElement;
+    const businessType = document.getElementById('businessType') as HTMLInputElement;
     const email = document.getElementById('email') as HTMLInputElement;
     const password = document.getElementById('password') as HTMLInputElement;
-    const name = document.getElementById('name') as HTMLInputElement;
+
 
     let isValid = true;
 
@@ -133,15 +165,62 @@ export default function SignUp() {
       setPasswordError(false);
       setPasswordErrorMessage('');
     }
-
+    //Name
     if (!name.value || name.value.length < 1) {
       setNameError(true);
-      setNameErrorMessage('Name is required.');
+      setNameErrorMessage('Nombre es requerido.');
       isValid = false;
     } else {
       setNameError(false);
       setNameErrorMessage('');
     }
+    //LastName
+    if (!LastName.value || LastName.value.length < 1) {
+      setLastNameError(true);
+      setLastNameErrorMessage('Apellido es requerido.');
+      isValid = false;
+    } else {
+      setLastNameError(false);
+      setLastNameErrorMessage('');
+    }
+    //Phone
+    if (!phone.value || phone.value.length < 1) {
+      setPhoneError(true);
+      setPhoneErrorMessage('Telefono es requerido.');
+      isValid = false;
+    } else {
+      setPhoneError(false);
+      setPhoneErrorMessage('');
+    }
+    //BusinessName
+    if (!businessName.value || businessName.value.length < 1) {
+      setBusinessNameError(true);
+      setBusinessNameErrorMessage('business es requerido.');
+      isValid = false;
+    } else {
+      setBusinessNameError(false);
+      setBusinessNameErrorMessage('');
+    }
+
+    //Country
+    if (!country.value || country.value.length < 1) {
+      setCountryError(true);
+      setCountryErrorMessage('Ciudad es requerido.');
+      isValid = false;
+    } else {
+      setCountryError(false);
+      setCountryErrorMessage('');
+    }
+    //BusinessType
+    if (!businessType.value || businessType.value.length < 1) {
+      setBusinessTypeError(true);
+      setBusinessTypeErrorMessage('Tipo de negocio es requerido.');
+      isValid = false;
+    } else {
+      setBusinessTypeError(false);
+      setBusinessTypeErrorMessage('');
+    }
+
 
     return isValid;
   };
@@ -154,15 +233,68 @@ export default function SignUp() {
     setShowCustomTheme((prev) => !prev);
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      name: data.get('name'),
-      lastName: data.get('lastName'),
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    // console.log({
+    //   name: data.get('name'),
+    //   LastName: data.get('LastName'),
+    //   email: data.get('email'),
+    //   password: data.get('password'),
+    //   phone: data.get('phone'),
+    //   businessName: data.get('businessName'),
+    //   country: data.get('country'),
+    //   businessType: data.get('businessType'),
+
+    // });
+    if (validateInputs()) {
+
+      const dataSignUp = {
+        name: data.get('name'),
+        LastName: data.get('LastName'),
+        email: data.get('email'),
+        password: data.get('password'),
+        phone: data.get('phone'),
+        businessName: data.get('businessName'),
+        country: data.get('country'),
+        businessType: data.get('businessType'),
+      }
+
+      try {
+
+        const resp = await reqResApi.post<SingUpInterface>('/auth/signup', dataSignUp);
+        console.log('resp <>', resp)
+        Swal.fire({
+          title: '¡Registro exitoso!!!',
+          text: '¡Bienvenido a Barfinder360!',
+          icon: 'success',
+          confirmButtonText: 'Ok'
+        });
+        navigate('/signIn');
+
+      } catch (error: unknown) {
+        console.log('error <>', error)
+        const errorResponse = error as {
+          response: {
+            data: {
+              [x: string]: string | undefined; error: string
+            }
+          }
+        };
+        Swal.fire({
+          title: '¡Error en el registro!',
+          text: errorResponse.response.data.message,
+          icon: 'error',
+          confirmButtonText: 'Ok'
+        });
+
+      }
+
+
+
+
+    }
+
   };
 
   return (
@@ -205,51 +337,170 @@ export default function SignUp() {
               onSubmit={handleSubmit}
               sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}
             >
-              <FormControl>
-                <FormLabel htmlFor="name">Full name</FormLabel>
-                <TextField
-                  autoComplete="name"
-                  name="name"
-                  required
-                  fullWidth
-                  id="name"
-                  placeholder="Jon Snow"
-                  error={nameError}
-                  helperText={nameErrorMessage}
-                  color={nameError ? 'error' : 'primary'}
-                />
-              </FormControl>
-              <FormControl>
-                <FormLabel htmlFor="email">Email</FormLabel>
-                <TextField
-                  required
-                  fullWidth
-                  id="email"
-                  placeholder="your@email.com"
-                  name="email"
-                  autoComplete="email"
-                  variant="outlined"
-                  error={emailError}
-                  helperText={emailErrorMessage}
-                  color={passwordError ? 'error' : 'primary'}
-                />
-              </FormControl>
-              <FormControl>
-                <FormLabel htmlFor="password">Password</FormLabel>
-                <TextField
-                  required
-                  fullWidth
-                  name="password"
-                  placeholder="••••••"
-                  type="password"
-                  id="password"
-                  autoComplete="new-password"
-                  variant="outlined"
-                  error={passwordError}
-                  helperText={passwordErrorMessage}
-                  color={passwordError ? 'error' : 'primary'}
-                />
-              </FormControl>
+              {/* Nombre y apellidos */}
+
+              <Grid container spacing={2}>
+                <Grid item xs={12} sm={6}>
+                  <FormControl>
+                    <FormLabel htmlFor="name">Nombre completo</FormLabel>
+                    <TextField
+                      autoComplete="name"
+                      name="name"
+                      required
+                      fullWidth
+                      id="name"
+                      placeholder="Diego Alejandro"
+                      error={nameError}
+                      helperText={nameErrorMessage}
+                      color={nameError ? 'error' : 'primary'}
+                    />
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <FormControl>
+                    <FormLabel htmlFor="LastName">Apellido completo</FormLabel>
+                    <TextField
+                      autoComplete="LastName"
+                      name="LastName"
+                      required
+                      fullWidth
+                      id="LastName"
+                      placeholder="Maradona Franco"
+                      error={LastNameError}
+                      helperText={LastNameErrorMessage}
+                      color={LastNameError ? 'error' : 'primary'}
+                    />
+                  </FormControl>
+                </Grid>
+              </Grid>
+
+              {/* Fin */}
+
+              {/* inicio con phone y  businessName*/}
+
+              <Grid container spacing={2}>
+                <Grid item xs={12} sm={6}>
+                  <FormControl>
+                    <FormLabel htmlFor="phone">Telefono</FormLabel>
+                    <TextField
+                      autoComplete="phone"
+                      name="phone"
+                      required
+                      fullWidth
+                      id="phone"
+                      placeholder="3001234567"
+                      error={phoneError}
+                      helperText={phoneErrorMessage}
+                      color={phoneError ? 'error' : 'primary'}
+                    />
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <FormControl>
+                    <FormLabel htmlFor="businessName">Nombre del negocio</FormLabel>
+                    <TextField
+                      autoComplete="businessName"
+                      name="businessName"
+                      required
+                      fullWidth
+                      id="businessName"
+                      placeholder="Mi negocio"
+                      error={BusinessNameError}
+                      helperText={BusinessNameErrorMessage}
+                      color={BusinessNameError ? 'error' : 'primary'}
+                    />
+                  </FormControl>
+                </Grid>
+              </Grid>
+
+              {/* Fin */}
+
+              {/* Inicio de ciudad y typo de negocio */}
+
+              <Grid container spacing={2}>
+                <Grid item xs={12} sm={6}>
+                  <FormControl>
+                    <FormLabel htmlFor="country">Pais</FormLabel>
+                    <TextField
+                      autoComplete="country"
+                      name="country"
+                      required
+                      fullWidth
+                      id="country"
+                      placeholder="Ciudad"
+                      error={countryError}
+                      helperText={countryErrorMessage}
+                      color={countryError ? 'error' : 'primary'}
+                    />
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <FormControl>
+                    <FormLabel htmlFor="businessName">Tipo de negocio</FormLabel>
+                    <TextField
+                      autoComplete="businessType"
+                      name="businessType"
+                      required
+                      fullWidth
+                      id="businessType"
+                      placeholder="Tipo de negocio"
+                      error={businessTypeError}
+                      helperText={businessTypeErrorMessage}
+                      color={businessTypeError ? 'error' : 'primary'}
+                    />
+                  </FormControl>
+                </Grid>
+              </Grid>
+
+              {/* Fin */}
+
+              {/* Email y password */}
+
+              <Grid container spacing={2}>
+                <Grid item xs={12} sm={6}>
+                  <FormControl>
+                    <FormLabel htmlFor="email">Email</FormLabel>
+                    <TextField
+                      required
+                      fullWidth
+                      id="email"
+                      placeholder="your@email.com"
+                      name="email"
+                      autoComplete="email"
+                      variant="outlined"
+                      error={emailError}
+                      helperText={emailErrorMessage}
+                      color={passwordError ? 'error' : 'primary'}
+                    />
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <FormControl>
+                    <FormLabel htmlFor="password">Password</FormLabel>
+                    <TextField
+                      required
+                      fullWidth
+                      name="password"
+                      placeholder="••••••"
+                      type="password"
+                      id="password"
+                      autoComplete="new-password"
+                      variant="outlined"
+                      error={passwordError}
+                      helperText={passwordErrorMessage}
+                      color={passwordError ? 'error' : 'primary'}
+                    />
+                  </FormControl>
+                </Grid>
+              </Grid>
+
+
+
+
+              {/*  Fin*/}
+
+
+
               <FormControlLabel
                 control={<Checkbox value="allowExtraEmails" color="primary" />}
                 label="I want to receive updates via email."
@@ -263,7 +514,7 @@ export default function SignUp() {
                 Sign up
               </Button>
               <Link
-                href="/material-ui/getting-started/templates/sign-in/"
+                to="/signIn"
                 variant="body2"
                 sx={{ alignSelf: 'center' }}
               >
