@@ -1,0 +1,32 @@
+/* styles.css */
+.custom-nav-dropdown .dropdown-toggle {
+  background-color: #e5f8e3;
+  color: #232d34; /* Color del texto del título */
+  font-weight: bold;
+}
+
+.custom-nav-dropdown .dropdown-toggle:hover,
+.custom-nav-dropdown .dropdown-toggle:focus {
+  background-color: #e5f8e3; /* Color de fondo del título al pasar el ratón */
+  color: #232d34; /* Color del texto del título al pasar el ratón */
+}
+
+.custom-nav-dropdown .dropdown-menu {
+  background-color: #ffffff; /* Color de fondo del menú */
+}
+
+.custom-nav-dropdown .dropdown-item {
+  color: #232d34; /* Color del texto de los ítems */
+}
+
+.custom-nav-dropdown .dropdown-item:hover {
+  background-color: #e5f8e3; /* Color de fondo de los ítems al pasar el ratón */
+}
+
+/* Color de verde paar los botones */
+
+/* #0A8920 */
+
+/* Color para el header */
+
+/* #e5f8e3 */
