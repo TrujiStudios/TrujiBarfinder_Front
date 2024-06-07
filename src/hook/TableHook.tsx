@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Swal from 'sweetalert2'
+
 const DEFAULT_IMAGE_URL =
     "https://restobar.loggro.com/assets/images/pirpos/pirpos_table_dnd.png";
 
@@ -80,10 +82,51 @@ export const TableHook = () => {
     // Función para manejar la eliminación de una mesa
     const deleteMesa = async (id: string) => {
         try {
-            await axios.delete(`http://localhost:5000/api/v1/tables/delete/${id}`, {
-                withCredentials: true
+
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: "btn btn-success   ",
+                    cancelButton: "btn btn-danger"
+                },
+                buttonsStyling: false  // esta liena 
             });
-            fetchMesas();
+            swalWithBootstrapButtons.fire({
+                title: "Seguro que desea eliminar?",
+                text: "La información que elimine no podrá ser recuperada.!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Si, eliminar!        ",
+                cancelButtonText: "No, cancelar!",
+                reverseButtons: true
+            }).then((result) => {
+
+                axios.delete(`http://localhost:5000/api/v1/tables/delete/${id}`, {
+                    withCredentials: true
+                });
+                fetchMesas();
+
+
+                if (result.isConfirmed) {
+                    fetchMesas();
+                    swalWithBootstrapButtons.fire({
+                        title: "¡Eliminado!",
+                        text: "Su archivo ha sido eliminado.",
+                        icon: "success"
+
+                    });
+                } else if (
+                    /* Read more about handling dismissals below */
+                    result.dismiss === Swal.DismissReason.cancel
+                ) {
+                    swalWithBootstrapButtons.fire({
+                        title: "Cancelled",
+                        text: "Your imaginary file is safe :)",
+                        icon: "error"
+                    });
+                }
+            });
+
+
         } catch (error) {
             console.error("Error deleting mesa", error);
         }
