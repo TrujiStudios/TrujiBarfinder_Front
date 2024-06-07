@@ -7,7 +7,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Divider from '@mui/material/Divider';
 import FormLabel from '@mui/material/FormLabel';
 import FormControl from '@mui/material/FormControl';
-import Link from '@mui/material/Link';
+// import Link from '@mui/material/Link';
 import TextField from '@mui/material/TextField';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
@@ -23,9 +23,16 @@ import ForgotPassword from './ForgotPassword';
 import getSignInTheme from './getSignInTheme';
 import ToggleColorMode from './ToggleColorMode';
 import { GoogleIcon, FacebookIcon, SitemarkIcon } from './CustomIcons';
+import { reqResApi } from '../../../api/reqRes';
+import { SingIng } from '../../../interface/sigIngInterface';
+import Swal from 'sweetalert2'
+import { useAuth } from '../../../AuthContext';
+import { useNavigate, Link } from 'react-router-dom';
+
+
 
 interface ToggleCustomThemeProps {
-  showCustomTheme: Boolean;
+  showCustomTheme: boolean;
   toggleCustomTheme: () => void;
 }
 
@@ -109,6 +116,13 @@ export default function SignIn() {
   const [passwordErrorMessage, setPasswordErrorMessage] = React.useState('');
   const [open, setOpen] = React.useState(false);
 
+  const navigate = useNavigate();
+
+
+  const { login } = useAuth();
+
+
+
   const toggleColorMode = () => {
     setMode((prev) => (prev === 'dark' ? 'light' : 'dark'));
   };
@@ -124,14 +138,45 @@ export default function SignIn() {
   const handleClose = () => {
     setOpen(false);
   };
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
+
+
+    const dataLogin = {
       email: data.get('email'),
       password: data.get('password'),
-    });
+    }
+
+    try {
+
+      const resp = await reqResApi.post<SingIng>('/auth/login', dataLogin, { withCredentials: true })
+      console.log('resp <>', resp.data.company)
+      Swal.fire({
+        title: '¡Bienvenido!',
+        text: `¡Bienvenido a Loggro!`,
+        icon: 'success',
+        confirmButtonText: 'Ok'
+      });
+
+      login();
+      navigate('/dashboard');
+
+    } catch (error: unknown) {
+      const errorResponse = error as {
+        response: {
+          data: {
+            [x: string]: string | undefined; error: string
+          }
+        }
+      };
+      Swal.fire({
+        title: '¡Error!',
+        text: errorResponse.response.data.message,
+        icon: 'error',
+        confirmButtonText: 'Ok'
+      });
+    }
   };
 
   const validateInputs = () => {
@@ -237,9 +282,10 @@ export default function SignIn() {
                     component="button"
                     onClick={handleClickOpen}
                     variant="body2"
-                    sx={{ alignSelf: 'baseline' }}
+                    // sx={{ alignSelf: 'baseline', textDecoration: 'none' }} // sx es para estilos de material ui en  disposit
+                    style={{ textDecoration: 'none', alignSelf: 'baseline' }}
                   >
-                    Forgot your password?
+                    ¿Olvidaste tu contraseña?
                   </Link>
                 </Box>
                 <TextField
@@ -271,11 +317,13 @@ export default function SignIn() {
                 Sign in
               </Button>
               <Link
-                href="/material-ui/getting-started/templates/sign-up/"
-                variant="body2"
-                sx={{ alignSelf: 'center' }}
+                to="/signUp"
+                // variant="body2"
+                // sx={{ alignSelf: 'center' }}
+                style={{ textDecoration: 'none', alignSelf: 'center' }}
               >
-                Don&apos;t have an account? Sign up
+                {/* Don&apos;t have an account? Sign up */}
+                ¿No&apos; tienes una cuenta? Inscribirse
               </Link>
             </Box>
             <Divider>or</Divider>
