@@ -34,7 +34,6 @@ export const TableHook = () => {
         image: DEFAULT_IMAGE_URL
     });
 
-    // Función para obtener las mesas
     const fetchMesas = async () => {
         try {
             const response = await reqResApi.get<ApiResponse>('/tables/all', { withCredentials: true });
