@@ -22,11 +22,10 @@ const StyledBox = styled("div")(({ theme }) => ({
       ? "0 0 12px 8px hsla(220, 25%, 80%, 0.2)"
       : "0 0 24px 12px hsla(210, 100%, 25%, 0.2)",
   outline: "1px solid",
-  backgroundImage: `url(${
-    theme.palette.mode === "light"
-      ? "/static/images/templates/templates-images/hero-light.png"
-      : "/static/images/templates/templates-images/hero-dark.png"
-  })`,
+  backgroundImage: `url(${theme.palette.mode === "light"
+    ? "/static/hero-light.png"
+    : "/static/hero-dark.png"
+    })`,
   backgroundSize: "cover",
   outlineColor:
     theme.palette.mode === "light"

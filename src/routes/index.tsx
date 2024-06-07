@@ -5,8 +5,8 @@ import {
 import { Home } from "../components/Home";
 import { Contact } from "../components/Contact";
 import AppBar from "../Nav";
-import SignUp from "../components/SignUp/SignUp";
-import SignIn from "../components/SignIn/SignIn";
+// import SignUp from "../components/SignUp/SignUp";
+// import SignIn from "../components/SignIn/SignIn";
 // import { Dashboard } from "../components/ManagementSystem/Dashboard";
 // import BarManagement from "../components/ManagementSystem/appBarManagement/BarManagement";
 import { Verder } from "../components/ManagementSystem/Verder";
@@ -16,15 +16,19 @@ import { Dashboard } from "../components/ManagementSystem/Dashboard";
 import Category from "../components/ManagementSystem/category/Category";
 import Table from "../components/ManagementSystem/tables/Table";
 import Mesas from "../components/ManagementSystem/tables/Example";
+import LandingPage from "../components/page/landing-page/LandingPage";
+import SignIn from "../components/page/sign-in/SignIn";
+import SignUp from "../components/page/sign-up/SignUp";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <AppBar />,
+    // element: <AppAppBar />,
+    // element: <AppBar />,
     children: [
       {
-        path: "home",
-        element: <Home />
+        path: "",
+        element: <LandingPage />
       },
       {
         path: "SignIn",

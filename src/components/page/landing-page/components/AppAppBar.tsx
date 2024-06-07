@@ -1,5 +1,6 @@
 import * as React from "react";
-import { Link, PaletteMode } from "@mui/material";
+// import { PaletteMode } from "@mui/material";
+import { PaletteMode } from "@mui/material";
 import Box from "@mui/material/Box";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
@@ -12,7 +13,7 @@ import Drawer from "@mui/material/Drawer";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import ToggleColorMode from "./ToggleColorMode";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Sitemark from "./SitemarkIcon";
 
 interface AppAppBarProps {
@@ -40,6 +41,8 @@ export default function AppAppBar({ mode, toggleColorMode }: AppAppBarProps) {
       setOpen(false);
     }
   };
+
+
 
   return (
     <AppBar
@@ -135,13 +138,22 @@ export default function AppAppBar({ mode, toggleColorMode }: AppAppBarProps) {
             }}
           >
             <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} />
-            <Button color="primary" variant="text" size="small">
-              Sign in
-            </Button>
+            <MenuItem>
+              <Button color="primary" variant="outlined" fullWidth>
+                <Link to="/SignIn">Sign in</Link>
+                {/* Sign in */}
+              </Button>
+            </MenuItem>
 
-            <Button color="primary" variant="contained" size="small">
-              Sign up
-            </Button>
+            <MenuItem >
+              <Button color="primary" variant="outlined" fullWidth>
+                {/* {/* <Button color="primary" variant="contained" fullWidth> */}
+                <Link to="/SignUp">Sign upt</Link>
+                {/* Sing up */}
+
+              </Button>
+
+            </MenuItem>
           </Box>
           <Box sx={{ display: { sm: "flex", md: "none" } }}>
             <IconButton aria-label="Menu button" onClick={toggleDrawer(true)}>
@@ -187,13 +199,15 @@ export default function AppAppBar({ mode, toggleColorMode }: AppAppBarProps) {
                   {/* Response */}
 
                   <Button color="primary" variant="contained" fullWidth>
-                    {/* <Link to="/signup">Sign upd</Link> */}
-                    Sign upr
+                    <Link to="/SignIn">Sign upd</Link>
+                    {/* Sign upr */}
                   </Button>
                 </MenuItem>
                 <MenuItem>
                   <Button color="primary" variant="outlined" fullWidth>
-                    Sign in
+                    <Link to="/SignUp"   >Sign up</Link>
+
+                    {/* Sign in */}
                   </Button>
                 </MenuItem>
               </Box>
