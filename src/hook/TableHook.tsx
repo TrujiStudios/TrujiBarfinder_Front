@@ -46,15 +46,12 @@ export const TableHook = () => {
 
     const createMesa = async () => {
         try {
-            // Asegurarse de que formValues incluya la imagen por defecto si no se ha especificado otra
+
             const mesaData = {
                 ...formValues,
                 image: formValues.image || DEFAULT_IMAGE_URL
             };
-
-            await axios.post("http://localhost:5000/api/v1/tables/create", mesaData, {
-                withCredentials: true
-            });
+            await reqResApi.post<ApiResponse>('/tables/create', mesaData, { withCredentials: true });
             fetchMesas();
             setShowModal(false);
         } catch (error) {
