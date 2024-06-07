@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Swal from 'sweetalert2'
+import { reqResApi } from '../api/reqRes';
+
 
 const DEFAULT_IMAGE_URL =
     "https://restobar.loggro.com/assets/images/pirpos/pirpos_table_dnd.png";
@@ -13,9 +15,15 @@ interface Mesa {
     image: string;
 }
 
+interface ApiResponse {
+    data: Mesa[];
+    message: string;
+
+}
+
 export const TableHook = () => {
     const [mesas, setMesas] = useState<Mesa[]>([]);
-    const [message, setMessage] = useState<Mesa[]>([]);
+    const [message, setMessage] = useState<string>("");
     const [showModal, setShowModal] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
     const [selectedMesa, setSelectedMesa] = useState<Mesa | null>(null);
@@ -29,12 +37,7 @@ export const TableHook = () => {
     // Función para obtener las mesas
     const fetchMesas = async () => {
         try {
-            const response = await axios.get(
-                "http://localhost:5000/api/v1/tables/all",
-                {
-                    withCredentials: true
-                }
-            );
+            const response = await reqResApi.get<ApiResponse>('/tables/all', { withCredentials: true });
             setMesas(response.data.data);
             setMessage(response.data.message);
         } catch (error) {
