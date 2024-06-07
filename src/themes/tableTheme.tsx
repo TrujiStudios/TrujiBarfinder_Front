@@ -4,8 +4,8 @@ export const styleess = {
     fontSize: "1.2em"
   },
   tableCellTable: {
-    fontSize: "1em" // 1em
-    // fontWeight: "bold"
+    fontSize: "1em", // 1em
+    fontWeight: "bold"
   },
   ButonNuenva: {
     color: "white",
