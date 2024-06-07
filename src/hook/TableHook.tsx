@@ -58,7 +58,6 @@ export const TableHook = () => {
         }
     };
 
-    // Función para manejar la edición de una mesa
     const updateMesa = async () => {
         if (selectedMesa) {
             try {
@@ -71,7 +70,6 @@ export const TableHook = () => {
         }
     };
 
-    // Función para manejar la eliminación de una mesa
     const deleteMesa = async (id: string) => {
         try {
 
