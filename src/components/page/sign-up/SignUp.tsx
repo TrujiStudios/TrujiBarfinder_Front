@@ -331,6 +331,7 @@ export default function SignUp() {
               component="h1"
               variant="h4"
               sx={{ width: '100%', fontSize: 'clamp(2rem, 10vw, 2.15rem)' }}
+              style={{ overflowY: 'auto', maxHeight: '100vh' }}
             >
               Sign up
             </Typography>
@@ -501,11 +502,9 @@ export default function SignUp() {
 
               {/*  Fin*/}
 
-
-
               <FormControlLabel
                 control={<Checkbox value="allowExtraEmails" color="primary" />}
-                label="I want to receive updates via email."
+                label="Quiero recibir actualizaciones por correo electrónico."
               />
               <Button
                 type="submit"
@@ -513,18 +512,19 @@ export default function SignUp() {
                 variant="contained"
                 onClick={validateInputs}
               >
-                Sign up
+                Crear cuanta
               </Button>
               <Link
                 to="/signIn"
               // variant="body2"
               // sx={{ alignSelf: 'center' }}
               >
-                Already have an account? Sign in
+                ¿Ya tienes una cuenta? Iniciar sesión
               </Link>
             </Box>
             <Divider>
               <Typography color="text.secondary">or</Typography>
+
             </Divider>
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
               <Button
@@ -537,13 +537,16 @@ export default function SignUp() {
               >
                 Sign up with Google
               </Button>
+
               <Button
                 type="submit"
                 fullWidth
                 variant="outlined"
                 color="secondary"
+
                 onClick={() => alert('Sign up with Facebook')}
                 startIcon={<FacebookIcon />}
+              // style={{ display: 'block' }}
               >
                 Sign up with Facebook
               </Button>
