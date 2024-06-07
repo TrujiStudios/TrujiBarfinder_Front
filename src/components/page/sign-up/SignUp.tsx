@@ -9,8 +9,8 @@ import FormLabel from '@mui/material/FormLabel';
 import FormControl from '@mui/material/FormControl';
 // import Link from '@mui/material/Link';
 import TextField from '@mui/material/TextField';
-import ToggleButton from '@mui/material/ToggleButton';
-import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+// import ToggleButton from '@mui/material/ToggleButton';
+// import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import { PaletteMode, Card as MuiCard } from '@mui/material';
@@ -36,43 +36,43 @@ interface ToggleCustomThemeProps {
   toggleCustomTheme: () => void;
 }
 
-function ToggleCustomTheme({
-  showCustomTheme,
-  toggleCustomTheme,
-}: ToggleCustomThemeProps) {
-  return (
-    <Box
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        width: '100dvw',
-        position: 'fixed',
-        bottom: 24,
-      }}
-    >
-      {/* <ToggleButtonGroup
-        color="primary"
-        exclusive
-        value={showCustomTheme}
-        onChange={toggleCustomTheme}
-        aria-label="Toggle design language"
-        sx={{
-          backgroundColor: 'background.default',
-          '& .Mui-selected': {
-            pointerEvents: 'none',
-          },
-        }}
-      >
-        <ToggleButton value>
-          <AutoAwesomeRoundedIcon sx={{ fontSize: '20px', mr: 1 }} />
-          Custom theme
-        </ToggleButton>
-        <ToggleButton value={false}>Material Design 2</ToggleButton>
-      </ToggleButtonGroup> */}
-    </Box>
-  );
-}
+// function ToggleCustomTheme({
+//   showCustomTheme,
+//   toggleCustomTheme,
+// }: ToggleCustomThemeProps) {
+//   return (
+//     <Box
+//       sx={{
+//         display: 'flex',
+//         flexDirection: 'column',
+//         alignItems: 'center',
+//         width: '100dvw',
+//         position: 'fixed',
+//         bottom: 24,
+//       }}
+//     >
+//       {/* <ToggleButtonGroup
+//         color="primary"
+//         exclusive
+//         value={showCustomTheme}
+//         onChange={toggleCustomTheme}
+//         aria-label="Toggle design language"
+//         sx={{
+//           backgroundColor: 'background.default',
+//           '& .Mui-selected': {
+//             pointerEvents: 'none',
+//           },
+//         }}
+//       >
+//         <ToggleButton value>
+//           <AutoAwesomeRoundedIcon sx={{ fontSize: '20px', mr: 1 }} />
+//           Custom theme
+//         </ToggleButton>
+//         <ToggleButton value={false}>Material Design 2</ToggleButton>
+//       </ToggleButtonGroup> */}
+//     </Box>
+//   );
+// }
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: 'flex',
@@ -229,9 +229,9 @@ export default function SignUp() {
     setMode((prev) => (prev === 'dark' ? 'light' : 'dark'));
   };
 
-  const toggleCustomTheme = () => {
-    setShowCustomTheme((prev) => !prev);
-  };
+  // const toggleCustomTheme = () => {
+  //   setShowCustomTheme((prev) => !prev);
+  // };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -549,10 +549,10 @@ export default function SignUp() {
           </Card>
         </Stack>
       </SignUpContainer>
-      <ToggleCustomTheme
+      {/* <ToggleCustomTheme
         showCustomTheme={showCustomTheme}
         toggleCustomTheme={toggleCustomTheme}
-      />
+      /> */}
     </ThemeProvider>
   );
 }
