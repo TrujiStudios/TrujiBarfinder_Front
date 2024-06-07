@@ -11,5 +11,12 @@ export const styles = {
   HeadersChildre: {
     backgroundColor: "blue",
     color: "black"
-  }
+  },
+  iconsDashboard: {
+    marginRight: "5px"
+  },
+  iconsProduct: {
+    marginTop: "6px",
+    marginRight: "-2px"
+  },
 };
