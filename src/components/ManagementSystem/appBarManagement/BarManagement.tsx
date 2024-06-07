@@ -70,7 +70,11 @@ function BarManagement() {
 
               {/* Fin */}
 
-              <NavDropdown title="Configuracion" id="basic-nav-dropdown">
+              <NavDropdown
+                className="custom-nav-dropdown"
+                title="Configuracion"
+                id="basic-nav-dropdown"
+              >
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">
                   Información de negocio
@@ -96,7 +100,11 @@ function BarManagement() {
               {/* Fin */}
 
               {/* inicio */}
-              <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+              <NavDropdown
+                className="custom-nav-dropdown"
+                title="Dropdown"
+                id="basic-nav-dropdown"
+              >
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">
                   Another action
