@@ -68,7 +68,7 @@ export default function SideNav({
               }}
             />
             <Typography component="p" variant="h6">
-              Riley Carter
+              Riley Carter (Admin)
             </Typography>
           </Stack>
           <MenuButton showBadge>
