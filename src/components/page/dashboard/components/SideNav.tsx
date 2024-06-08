@@ -1,26 +1,28 @@
-import * as React from 'react';
-import { PaletteMode } from '@mui/material';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Divider from '@mui/material/Divider';
-import Drawer from '@mui/material/Drawer';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
+import * as React from "react";
+import { PaletteMode } from "@mui/material";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import Divider from "@mui/material/Divider";
+import Drawer from "@mui/material/Drawer";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
 
-import AddRoundedIcon from '@mui/icons-material/AddRounded';
-import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
-import ContactPageRoundedIcon from '@mui/icons-material/ContactPageRounded';
-import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
-import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
-import NotificationsRoundedIcon from '@mui/icons-material/NotificationsRounded';
+import AddRoundedIcon from "@mui/icons-material/AddRounded";
+import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
+import ContactPageRoundedIcon from "@mui/icons-material/ContactPageRounded";
+import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
+import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
+import NotificationsRoundedIcon from "@mui/icons-material/NotificationsRounded";
+import axios from "axios";
 
-import MenuButton from './MenuButton';
-import ToggleColorMode from './ToggleColorMode';
+import MenuButton from "./MenuButton";
+import ToggleColorMode from "./ToggleColorMode";
+import { Link } from "react-router-dom";
 
 interface SideNavProps {
   open: boolean | undefined;
@@ -30,30 +32,44 @@ interface SideNavProps {
 }
 
 const accountsList = [
-  { label: 'Perfil', icon: <AccountCircleRoundedIcon sx={{ fontSize: 20 }} /> },
-  { label: 'My account', icon: <ContactPageRoundedIcon sx={{ fontSize: 20 }} /> },
+  { label: "Perfil", icon: <AccountCircleRoundedIcon sx={{ fontSize: 20 }} /> },
+  {
+    label: "My account",
+    icon: <ContactPageRoundedIcon sx={{ fontSize: 20 }} />
+  }
 ];
 
 const settingsList = [
-  { label: 'Add account', icon: <AddRoundedIcon sx={{ fontSize: 20 }} /> },
-  { label: 'Configuración', icon: <SettingsRoundedIcon sx={{ fontSize: 20 }} /> },
+  { label: "Add account", icon: <AddRoundedIcon sx={{ fontSize: 20 }} /> },
+  {
+    label: "Configuración",
+    icon: <SettingsRoundedIcon sx={{ fontSize: 20 }} />
+  }
 ];
 
 export default function SideNav({
   open,
   toggleDrawer,
   mode,
-  toggleColorMode,
+  toggleColorMode
 }: SideNavProps) {
+  const handleLogout = () => {
+    axios.post(
+      "http://localhost:5000/api/v1/auth/logout",
+      {},
+      { withCredentials: true }
+    );
+    // logout();
+  };
   return (
     <Drawer anchor="right" open={open} onClose={toggleDrawer(false)}>
       <Stack
         gap={2}
         sx={{
-          minWidth: '80dvw',
+          minWidth: "80dvw",
           p: 3,
-          backgroundColor: 'background.paper',
-          flexGrow: 1,
+          backgroundColor: "background.paper",
+          flexGrow: 1
         }}
       >
         <Stack direction="row" gap={1}>
@@ -64,7 +80,7 @@ export default function SideNav({
               src="/static/images/avatar/7.jpg"
               sx={{
                 width: 24,
-                height: 24,
+                height: 24
               }}
             />
             <Typography component="p" variant="h6">
@@ -99,8 +115,17 @@ export default function SideNav({
           </List>
         </Stack>
         <Stack>
-          <Button variant="outlined" fullWidth startIcon={<LogoutRoundedIcon />}>
+          <Button
+            variant="outlined"
+            fullWidth
+            startIcon={<LogoutRoundedIcon />}
+          >
             Logout
+            <Link
+              style={{ textDecoration: "none", color: "#DC3545" }}
+              to="/signIn"
+              onClick={handleLogout}
+            ></Link>
           </Button>
         </Stack>
       </Stack>
