@@ -1,14 +1,13 @@
-import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Divider from '@mui/material/Divider';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import Typography from '@mui/material/Typography';
-import MoreVertRoundedIcon from '@mui/icons-material/MoreVertRounded';
-import MenuButton from './MenuButton';
+import * as React from "react";
+import Avatar from "@mui/material/Avatar";
+import Divider from "@mui/material/Divider";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import Typography from "@mui/material/Typography";
+import MoreVertRoundedIcon from "@mui/icons-material/MoreVertRounded";
+import MenuButton from "./MenuButton";
 import axios from "axios";
-import { Link } from 'react-router-dom';
-
+import { Link } from "react-router-dom";
 
 export default function OptionsMenu() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -19,7 +18,6 @@ export default function OptionsMenu() {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
 
   const handleLogout = () => {
     axios.post(
@@ -40,8 +38,8 @@ export default function OptionsMenu() {
         open={open}
         onClose={handleClose}
         onClick={handleClose}
-        transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+        transformOrigin={{ horizontal: "right", vertical: "top" }}
+        anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         <MenuItem sx={{ mt: 1 }}>
           <Avatar
@@ -51,7 +49,7 @@ export default function OptionsMenu() {
             sx={{
               width: 24,
               height: 24,
-              mr: 1,
+              mr: 1
             }}
           />
           <Typography component="p" variant="subtitle2">
@@ -69,14 +67,20 @@ export default function OptionsMenu() {
             component="p"
             variant="subtitle2"
             sx={{
-              color: 'error.main',
+              color: "error.main"
             }}
           >
             {/* Logout */}
-            <Link style={{ textDecoration: 'none', color: '#DC3545' }} to="/signIn" onClick={handleLogout}>Logout</Link>
+            <Link
+              style={{ textDecoration: "none", color: "#DC3545" }}
+              to="/signIn"
+              onClick={handleLogout}
+            >
+              Logout
+            </Link>
           </Typography>
         </MenuItem>
       </Menu>
-    </React.Fragment >
+    </React.Fragment>
   );
 }
