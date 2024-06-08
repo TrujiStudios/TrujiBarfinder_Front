@@ -30,13 +30,13 @@ interface SideNavProps {
 }
 
 const accountsList = [
-  { label: 'Profile', icon: <AccountCircleRoundedIcon sx={{ fontSize: 20 }} /> },
+  { label: 'Perfil', icon: <AccountCircleRoundedIcon sx={{ fontSize: 20 }} /> },
   { label: 'My account', icon: <ContactPageRoundedIcon sx={{ fontSize: 20 }} /> },
 ];
 
 const settingsList = [
   { label: 'Add account', icon: <AddRoundedIcon sx={{ fontSize: 20 }} /> },
-  { label: 'Settings', icon: <SettingsRoundedIcon sx={{ fontSize: 20 }} /> },
+  { label: 'Configuración', icon: <SettingsRoundedIcon sx={{ fontSize: 20 }} /> },
 ];
 
 export default function SideNav({
