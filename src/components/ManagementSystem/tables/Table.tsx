@@ -17,6 +17,10 @@ import {
 } from "@mui/material";
 import { styleess, style } from "../../../themes/tableTheme";
 import { TableHook } from "../../../hook/TableHook";
+import IconButton from '@mui/material/IconButton';
+import EditIcon from "@mui/icons-material/Delete";
+import { Delete } from "@mui/icons-material";
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const Mesas = () => {
   const {
@@ -42,7 +46,9 @@ const Mesas = () => {
       justifyContent="center"
       alignItems="center"
       flexDirection="column"
+      mt={16}
     >
+      <h2> Mesas</h2>
       <Box mt={2} mb={2}>
         <Button
           variant="contained"
@@ -117,21 +123,22 @@ const Mesas = () => {
                       />
                     </TableCell>
                     <TableCell>
-                      <Button
-                        variant="contained"
+
+                      <IconButton
+                        // color="primary"
                         style={styleess.buttonEditar}
                         onClick={() => handleOpenModal(mesa)}
                       >
-                        Editar
-                      </Button>
-                      <Button
-                        variant="contained"
-                        // color="DDC3545"
+                        <EditIcon />
+                      </IconButton>
+
+                      <IconButton
+                        // color="primary"
                         style={styleess.buttonEliminar}
                         onClick={() => deleteMesa(mesa.id)}
                       >
-                        Eliminar
-                      </Button>
+                        <DeleteIcon />
+                      </IconButton>
                     </TableCell>
                   </TableRow>
                 ))}
