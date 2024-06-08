@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
-import { Container, PaletteMode } from '@mui/material';
+import { Container, Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText, PaletteMode } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import Stack from '@mui/material/Stack';
 import MuiToolbar from '@mui/material/Toolbar';
@@ -17,6 +17,8 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { Link, Outlet } from 'react-router-dom';
 import { styles } from '../../../../themes/NavbarThemes';
+import TabletIcon from '@mui/icons-material/Tablet';
+import ContactPageRoundedIcon from '@mui/icons-material/ContactPageRounded';
 
 interface NavBarProps {
   mode: PaletteMode;
@@ -48,6 +50,11 @@ function a11yProps(index: number) {
   };
 }
 
+const accountList = [
+  { label: 'Mesas', icon: <TabletIcon sx={{ fontSize: 20 }} />, route: '/dashboard/tables' },
+  { label: 'My account', icon: <ContactPageRoundedIcon sx={{ fontSize: 20 }} />, route: '/dashboard/category' },
+];
+
 export default function Navbar({ mode, toggleColorMode }: NavBarProps) {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState(0);
@@ -56,6 +63,7 @@ export default function Navbar({ mode, toggleColorMode }: NavBarProps) {
   const [anchorElAnalytics, setAnchorElAnalytics] = React.useState<null | HTMLElement>(null);
   const [anchorElClients, setAnchorElClients] = React.useState<null | HTMLElement>(null);
   const [anchorElProducts, setAnchorElProducts] = React.useState<null | HTMLElement>(null);
+  const [anchorElExample, setAnchorElExample] = React.useState<null | HTMLElement>(null);
 
   const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -78,10 +86,15 @@ export default function Navbar({ mode, toggleColorMode }: NavBarProps) {
     setAnchorElProducts(event.currentTarget);
   };
 
+  const handleExampleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElExample(event.currentTarget);
+  }
+
   const handleMenuClose = () => {
     setAnchorElAnalytics(null);
     setAnchorElClients(null);
     setAnchorElProducts(null);
+    setAnchorElExample(null);
   };
 
   return (
@@ -163,6 +176,16 @@ export default function Navbar({ mode, toggleColorMode }: NavBarProps) {
               {...a11yProps(2)}
             />
 
+            {/* // Tab para Example */}
+            <Tab
+              label="Example"
+              // aria-controls="clients-menu"
+              aria-haspopup="true"
+              onClick={handleExampleMenuOpen}
+              {...a11yProps(2)}
+            />
+            {/* Fin */}
+
 
 
 
@@ -214,9 +237,14 @@ export default function Navbar({ mode, toggleColorMode }: NavBarProps) {
           keepMounted
         >
           <MenuItem onClick={handleMenuClose}>
-            <Link style={styles.linkNavbar} to="/dashboard/tables">Mesas</Link>
+            <Link style={styles.linkNavbar} to="/dashboard/tables">
+              <TabletIcon />
+              Mesas
+            </Link>
 
           </MenuItem>
+          <Divider />
+
           {/* <MenuItem onClick={handleMenuClose}>Add New</MenuItem> */}
           <MenuItem onClick={handleMenuClose}>
             <Link style={styles.linkNavbar} to="/dashboard/product">
@@ -226,6 +254,42 @@ export default function Navbar({ mode, toggleColorMode }: NavBarProps) {
         </Menu>
 
         {/* //Fin */}
+
+        {/* Inicio Prueba */}
+
+        <Menu
+          id="example-menu"
+          anchorEl={anchorElExample}
+          open={Boolean(anchorElExample)}
+          onClose={handleMenuClose}
+          keepMounted
+        >
+
+          <List>
+            {accountList.map((item, index) => (
+              <ListItem onClick={handleMenuClose} key={index} disablePadding>
+                <ListItemButton>
+                  <ListItemIcon>{item.icon}</ListItemIcon>
+                  <ListItemText primary={<Link to={item.route}>{item.label}</Link>} />
+                  {/* <ListItemText primary={item.label} /> */}
+                </ListItemButton>
+              </ListItem>
+            ))}
+          </List>
+
+
+
+
+
+        </Menu>
+
+
+
+
+
+
+
+        {/* Fin */}
 
 
 
