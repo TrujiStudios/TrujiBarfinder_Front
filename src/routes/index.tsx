@@ -2,9 +2,9 @@ import {
   createBrowserRouter
   // RouterProvider,
 } from "react-router-dom";
-import { Home } from "../components/Home";
+// import { Home } from "../components/Home";
 import { Contact } from "../components/Contact";
-import AppBar from "../Nav";
+// import AppBar from "../Nav";
 // import SignUp from "../components/SignUp/SignUp";
 // import SignIn from "../components/SignIn/SignIn";
 // import BarManagement from "../components/ManagementSystem/appBarManagement/BarManagement";
