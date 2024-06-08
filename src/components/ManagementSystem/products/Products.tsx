@@ -51,14 +51,15 @@ const Products: React.FC = () => {
           textAlign: "center",
           fontSize: "1.5rem",
           fontWeight: "bold",
-          marginTop: "2rem"
+          marginTop: "10rem",
+          color: "black",
         }}
       >
         Productos
       </h2>
 
       <Box
-        mt={10}
+        mt={7}
         display="flex"
         justifyContent="space-between"
         alignItems="center"

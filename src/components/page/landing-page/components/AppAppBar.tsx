@@ -13,7 +13,7 @@ import Drawer from "@mui/material/Drawer";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import ToggleColorMode from "./ToggleColorMode";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import Sitemark from "./SitemarkIcon";
 
 interface AppAppBarProps {
@@ -215,6 +215,7 @@ export default function AppAppBar({ mode, toggleColorMode }: AppAppBarProps) {
           </Box>
         </Toolbar>
       </Container>
+      <Outlet />
     </AppBar>
   );
 }

@@ -10,6 +10,7 @@ export const styleess = {
   ButonNuenva: {
     color: "white",
     backgroundColor: "#0A8920",
+    marginTop: "10em",
     "&:hover": {
       color: "black",
       backgroundColor: "#C7C1D3"

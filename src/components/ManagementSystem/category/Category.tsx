@@ -50,13 +50,13 @@ const TablaCategorias: React.FC = () => {
           textAlign: "center",
           fontSize: "1.5rem",
           fontWeight: "bold",
-          marginTop: "2rem"
+          marginTop: "10rem"
         }}
       >
         Categorías
       </h2>
       <Box
-        mt={10}
+        mt={6}
         display="flex"
         justifyContent="space-between"
         alignItems="center"
