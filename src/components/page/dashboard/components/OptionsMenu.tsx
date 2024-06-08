@@ -6,6 +6,9 @@ import MenuItem from '@mui/material/MenuItem';
 import Typography from '@mui/material/Typography';
 import MoreVertRoundedIcon from '@mui/icons-material/MoreVertRounded';
 import MenuButton from './MenuButton';
+import axios from "axios";
+import { Link } from 'react-router-dom';
+
 
 export default function OptionsMenu() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -15,6 +18,16 @@ export default function OptionsMenu() {
   };
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+
+  const handleLogout = () => {
+    axios.post(
+      "http://localhost:5000/api/v1/auth/logout",
+      {},
+      { withCredentials: true }
+    );
+    // logout();
   };
   return (
     <React.Fragment>
@@ -42,7 +55,7 @@ export default function OptionsMenu() {
             }}
           />
           <Typography component="p" variant="subtitle2">
-            Riley Carter
+            Riley Carter Si
           </Typography>
         </MenuItem>
         <Divider />
@@ -51,8 +64,19 @@ export default function OptionsMenu() {
         <Divider />
         <MenuItem onClick={handleClose}>Add another account</MenuItem>
         <MenuItem onClick={handleClose}>Settings</MenuItem>
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
+        <MenuItem onClick={handleClose}>
+          <Typography
+            component="p"
+            variant="subtitle2"
+            sx={{
+              color: 'error.main',
+            }}
+          >
+            {/* Logout */}
+            <Link style={{ textDecoration: 'none', color: '#DC3545' }} to="/signIn" onClick={handleLogout}>Logout</Link>
+          </Typography>
+        </MenuItem>
       </Menu>
-    </React.Fragment>
+    </React.Fragment >
   );
 }
