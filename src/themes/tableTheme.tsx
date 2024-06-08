@@ -28,11 +28,6 @@ export const styleess = {
     color: "#FFFFFF",
     backgroundColor: "#DC3545",
     fontWeight: "bold",
-
-    "&:hover": {
-      color: "black",
-      backgroundColor: "#C7C1D3"
-    }
   },
 
   buttonEditar: {

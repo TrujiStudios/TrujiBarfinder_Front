@@ -271,7 +271,6 @@ export default function Navbar({ mode, toggleColorMode }: NavBarProps) {
                 <ListItemButton>
                   <ListItemIcon>{item.icon}</ListItemIcon>
                   <ListItemText primary={<Link to={item.route}>{item.label}</Link>} />
-                  {/* <ListItemText primary={item.label} /> */}
                 </ListItemButton>
               </ListItem>
             ))}
