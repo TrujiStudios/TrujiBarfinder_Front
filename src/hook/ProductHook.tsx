@@ -6,6 +6,7 @@ import { SelectChangeEvent } from "@mui/material";
 interface Categoria {
   id: string;
   name: string;
+  status: boolean;
 }
 
 interface Producto {

@@ -52,7 +52,7 @@ const Products: React.FC = () => {
           fontSize: "1.5rem",
           fontWeight: "bold",
           marginTop: "10rem",
-          color: "black",
+          color: "black"
         }}
       >
         Productos
@@ -171,15 +171,17 @@ const Products: React.FC = () => {
             label="Categoría"
             name="category"
             fullWidth
-            // value={selectedProducto?.category[1]}
             defaultValue={selectedProducto?.category[0] || ""}
             onChange={handleInputChange}
           >
-            {categorias.map((categoria) => (
-              <MenuItem key={categoria.id} value={categoria.id}>
-                {categoria.name}
-              </MenuItem>
-            ))}
+            {categorias.map(
+              (categoria) =>
+                categoria.status && (
+                  <MenuItem key={categoria.id} value={categoria.id}>
+                    {categoria.name}
+                  </MenuItem>
+                )
+            )}
           </Select>
           <TextField
             margin="dense"

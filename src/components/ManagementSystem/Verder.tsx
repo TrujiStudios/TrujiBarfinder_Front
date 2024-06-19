@@ -1,7 +1,9 @@
 // import React from 'react'
 
 export const Verder = () => {
-    return (
-        <><h1> Verder</h1></>
-    )
-}
+  return (
+    <>
+      <h1> Vender</h1>
+    </>
+  );
+};

@@ -1,16 +1,16 @@
 // import * as React from 'react';
-import { styled } from '@mui/material/styles';
-import Typography from '@mui/material/Typography';
-import Breadcrumbs from '@mui/material/Breadcrumbs';
-import { SitemarkIcon } from '../internals/components/CustomIcons';
+import { styled } from "@mui/material/styles";
+import Typography from "@mui/material/Typography";
+import Breadcrumbs from "@mui/material/Breadcrumbs";
+import { SitemarkIcon } from "../internals/components/CustomIcons";
 
 const StyledBreadcrumbs = styled(Breadcrumbs)(({ theme }) => ({
-  '& .MuiBreadcrumbs-separator': {
-    color: theme.palette.action.disabled,
+  "& .MuiBreadcrumbs-separator": {
+    color: theme.palette.action.disabled
   },
-  '& .MuiBreadcrumbs-ol': {
-    alignItems: 'normal',
-  },
+  "& .MuiBreadcrumbs-ol": {
+    alignItems: "normal"
+  }
 }));
 
 export default function NavbarBreadcrumbs() {
@@ -18,7 +18,7 @@ export default function NavbarBreadcrumbs() {
     <StyledBreadcrumbs aria-label="breadcrumb">
       <SitemarkIcon />
       <Typography fontWeight="medium" color="text.primary">
-        Project (Production)
+        TrtujiStudios (Production)
       </Typography>
     </StyledBreadcrumbs>
   );
