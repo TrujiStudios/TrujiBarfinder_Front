@@ -106,6 +106,12 @@ export default function Navbar({ mode, toggleColorMode }: NavBarProps) {
           <Tabs value={value} onChange={handleChange} aria-label="navbar tabs">
             <Tab label="Home" {...a11yProps(0)} />
             <Tab
+              label="Vender"
+              component={Link}
+              to="/dashboard/sell"
+              {...a11yProps(0)}
+            />
+            <Tab
               label="Analytics"
               // aria-controls="analytics-menu"
               aria-haspopup="true"

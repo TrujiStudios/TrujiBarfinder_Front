@@ -19,7 +19,7 @@ import { styleess, style } from "../../../themes/tableTheme";
 import { TableHook } from "../../../hook/TableHook";
 import IconButton from "@mui/material/IconButton";
 import EditIcon from "@mui/icons-material/Delete";
-import { Delete } from "@mui/icons-material";
+// import { Delete } from "@mui/icons-material";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 const Mesas = () => {

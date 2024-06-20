@@ -19,6 +19,9 @@ import SignIn from "../components/page/sign-in/SignIn";
 import SignUp from "../components/page/sign-up/SignUp";
 import { Dashboard } from "../components/ManagementSystem/Dashboard";
 // import Dashboard from "../components/page/dashboard/Dashboard";
+import Sell from "../components/ManagementSystem/vender/Sell";
+// import TableOrder from "../components/ManagementSystem/ordenes/TableOrder";
+import TableOrderContainer from "../components/ManagementSystem/ordenes/TableOrderContainer";
 
 const router = createBrowserRouter([
   {
@@ -71,6 +74,14 @@ const router = createBrowserRouter([
       {
         path: "tablesdos",
         element: <Mesas />
+      },
+      {
+        path: "sell",
+        element: <Sell />
+      },
+      {
+        path: "order/:tableId",
+        element: <TableOrderContainer />
       }
     ]
   }
