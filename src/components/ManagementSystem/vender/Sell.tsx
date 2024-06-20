@@ -13,6 +13,7 @@ interface Table {
   id: number;
   name: string;
   occupied: boolean;
+  status: boolean;
 }
 
 const Sell: React.FC = () => {
@@ -37,26 +38,26 @@ const Sell: React.FC = () => {
   return (
     <Box>
       <Grid mt={13} container spacing={2}>
-        {tables.map((table) => (
-          <Grid style={{}} item key={table.id} xs={12} sm={6} md={4} lg={3}>
-            {/* <Card onClick={() => handleTableClick(table)}>
-              <CardContent> */}
-            <Typography style={{ marginLeft: "20px" }} variant="h6">
-              {table.name}
-            </Typography>
-            <img
-              src={table.occupied ? DEFAULT_IMAGE_URL_VERDE : DEFAULT_IMAGE_URL}
-              alt={table.name}
-              onClick={() => handleTableClick(table)}
-              width="100"
-            />
-            <Typography style={{ marginLeft: "20px" }} variant="h6">
-              {table.occupied ? "Ocupada" : "Disponible"}
-            </Typography>
-            {/* </CardContent>
-            </Card> */}
-          </Grid>
-        ))}
+        {tables
+          .filter((table) => table.status)
+          .map((table) => (
+            <Grid style={{}} item key={table.id} xs={12} sm={6} md={4} lg={3}>
+              <Typography style={{ marginLeft: "20px" }} variant="h6">
+                {table.name}
+              </Typography>
+              <img
+                src={
+                  table.occupied ? DEFAULT_IMAGE_URL_VERDE : DEFAULT_IMAGE_URL
+                }
+                alt={table.name}
+                onClick={() => handleTableClick(table)}
+                width="100"
+              />
+              <Typography style={{ marginLeft: "20px" }} variant="h6">
+                {table.status ? "Disponible" : "Ocupada"}
+              </Typography>
+            </Grid>
+          ))}
       </Grid>
     </Box>
   );
