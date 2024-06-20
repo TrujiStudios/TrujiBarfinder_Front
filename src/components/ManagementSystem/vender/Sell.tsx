@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Box, Grid, Card, CardContent, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import Container from "react-bootstrap/Container";
 
 const DEFAULT_IMAGE_URL =
   "https://restobar.loggro.com/assets/images/pirpos/pirpos_table_dnd.png";
@@ -35,21 +36,25 @@ const Sell: React.FC = () => {
 
   return (
     <Box>
-      <Grid mt={20} container spacing={2}>
+      <Grid mt={13} container spacing={2}>
         {tables.map((table) => (
-          <Grid item key={table.id} xs={12} sm={6} md={4} lg={3}>
-            <Card onClick={() => handleTableClick(table)}>
-              <CardContent>
-                <img
-                  src={
-                    table.occupied ? DEFAULT_IMAGE_URL_VERDE : DEFAULT_IMAGE_URL
-                  }
-                  alt={table.name}
-                  width="100"
-                />
-                <Typography variant="h6">{table.name}</Typography>
-              </CardContent>
-            </Card>
+          <Grid style={{}} item key={table.id} xs={12} sm={6} md={4} lg={3}>
+            {/* <Card onClick={() => handleTableClick(table)}>
+              <CardContent> */}
+            <Typography style={{ marginLeft: "20px" }} variant="h6">
+              {table.name}
+            </Typography>
+            <img
+              src={table.occupied ? DEFAULT_IMAGE_URL_VERDE : DEFAULT_IMAGE_URL}
+              alt={table.name}
+              onClick={() => handleTableClick(table)}
+              width="100"
+            />
+            <Typography style={{ marginLeft: "20px" }} variant="h6">
+              {table.occupied ? "Ocupada" : "Disponible"}
+            </Typography>
+            {/* </CardContent>
+            </Card> */}
           </Grid>
         ))}
       </Grid>
