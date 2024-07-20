@@ -6,7 +6,8 @@ import {
   Card,
   CardContent,
   Grid,
-  Chip
+  Chip,
+  Paper
 } from "@mui/material";
 import axios from "axios";
 
@@ -64,11 +65,6 @@ const TableOrder: React.FC<TableOrderProps> = ({ table, onClose }) => {
     setOrder([...order, product]);
   };
 
-  //   const filteredProducts =
-  //     selectedCategory === "Todos"
-  //       ? products
-  //       : products.filter((product) => product.category === selectedCategory);
-
   const filteredProducts = products.filter((product) => {
     if (selectedCategory === "Todos") {
       return true;
@@ -76,49 +72,75 @@ const TableOrder: React.FC<TableOrderProps> = ({ table, onClose }) => {
     if (selectedCategory.toString() === product.category[1].toString()) {
       return true;
     }
-
     return false;
   });
 
   return (
-    <Box mt={30}>
-      <Typography variant="h4">Mesa: {table.name}</Typography>
-      <Button onClick={onClose}>Cerrar</Button>
-      <Box mb={2}>
+    <Box mt={10} p={2}>
+      <Typography variant="h4" gutterBottom>
+        Mesa: {table.name}
+      </Typography>
+      <Button
+        onClick={onClose}
+        variant="contained"
+        color="secondary"
+        sx={{ mb: 2 }}
+      >
+        Cerrar
+      </Button>
+      <Box mb={2} display="flex" justifyContent="center" flexWrap="wrap">
         {categories.map((category) => (
           <Chip
             key={category}
             label={category}
             onClick={() => setSelectedCategory(category)}
             color={selectedCategory === category ? "primary" : "default"}
-            style={{ marginRight: 8, cursor: "pointer" }}
+            sx={{ margin: 0.5 }}
           />
         ))}
       </Box>
       <Grid container spacing={2}>
         {filteredProducts.map((product) => (
           <Grid item key={product._id} xs={12} sm={6} md={4} lg={3}>
-            <Card onClick={() => handleProductClick(product)}>
+            <Card
+              onClick={() => handleProductClick(product)}
+              sx={{ cursor: "pointer", boxShadow: 3 }}
+            >
               <CardContent>
-                <img src={product.image} alt={product.name} width="100" />
-                <Typography variant="h6">{product.name}</Typography>
-                <Typography variant="body2">${product.price}</Typography>
+                <Box display="flex" justifyContent="center" mb={2}>
+                  <img src={product.image} alt={product.name} width="100" />
+                </Box>
+                <Typography variant="h6" align="center">
+                  {product.name}
+                </Typography>
+                <Typography
+                  variant="body1"
+                  align="center"
+                  color="textSecondary"
+                >
+                  ${product.price}
+                  {/* ${product.price.toFixed(2)} */}
+                </Typography>
               </CardContent>
             </Card>
           </Grid>
         ))}
       </Grid>
-      <Box>
-        <Typography variant="h5">Orden:</Typography>
+      <Paper sx={{ position: "fixed", bottom: 0, right: 0, width: 300, p: 2 }}>
+        <Typography variant="h6" gutterBottom>
+          Orden:
+        </Typography>
         {order.map((item, index) => (
           <Typography key={index}>
             {item.name} - ${item.price}
+            {/* {item.name} - ${item.price.toFixed(2)} */}
           </Typography>
         ))}
-        <Typography variant="h6">
+        <Typography variant="h6" mt={2}>
           Total: ${order.reduce((total, item) => total + item.price, 0)}
+          {/* {order.reduce((total, item) => total + item.price, 0).toFixed(2)} */}
         </Typography>
-      </Box>
+      </Paper>
     </Box>
   );
 };
