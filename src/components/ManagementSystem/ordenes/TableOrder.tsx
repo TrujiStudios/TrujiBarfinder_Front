@@ -118,8 +118,8 @@ const TableOrder: React.FC<TableOrderProps> = ({ table, onClose }) => {
                   align="center"
                   color="textSecondary"
                 >
-                  ${product.price}
-                  {/* ${product.price.toFixed(2)} */}
+                  {/* ${product.price} */}$
+                  {parseFloat(product.price.toString()).toFixed(2)}
                 </Typography>
               </CardContent>
             </Card>
@@ -132,13 +132,17 @@ const TableOrder: React.FC<TableOrderProps> = ({ table, onClose }) => {
         </Typography>
         {order.map((item, index) => (
           <Typography key={index}>
-            {item.name} - ${item.price}
-            {/* {item.name} - ${item.price.toFixed(2)} */}
+            {item.name} - ${parseFloat(item.price.toString()).toFixed(2)}
           </Typography>
         ))}
         <Typography variant="h6" mt={2}>
-          Total: ${order.reduce((total, item) => total + item.price, 0)}
-          {/* {order.reduce((total, item) => total + item.price, 0).toFixed(2)} */}
+          Total: $
+          {order
+            .reduce(
+              (total, item) => total + parseFloat(item.price.toString()),
+              0
+            )
+            .toFixed(2)}
         </Typography>
       </Paper>
     </Box>
