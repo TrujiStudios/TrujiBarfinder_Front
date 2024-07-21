@@ -18,9 +18,12 @@ interface Product {
   image: string;
   category: string;
   status: boolean;
+  quantity?: number;
+  productId?: number;
 }
 
 interface Table {
+  _id: number;
   id: number;
   name: string;
   occupied: boolean;
@@ -29,6 +32,22 @@ interface Table {
 interface TableOrderProps {
   table: Table;
   onClose: () => void;
+}
+
+// interface Producto {
+//   _id: string;
+//   // Asume otras propiedades del producto aquí, como price, name, etc.
+//   name: string;
+//   price: number;
+//   image: string;
+//   category: string;
+//   status: boolean;
+//   quantity?: number; // La propiedad quantity es opcional aquí porque originalmente no existe en el producto
+// }
+
+interface Orden {
+  tableId: number;
+  products: Array<{ _id: number; quantity: number }>;
 }
 
 const TableOrder: React.FC<TableOrderProps> = ({ table, onClose }) => {
@@ -74,6 +93,80 @@ const TableOrder: React.FC<TableOrderProps> = ({ table, onClose }) => {
     }
     return false;
   });
+
+  // const enviarOrden = async () => {
+  //   const orden = {
+  //     tableId: table._id,
+  //     products: order.map((product) => ({
+  //       productId: product._id // Agrega esta línea
+  //       // quantity: product.price
+  //     }))
+  //   };
+  //   try {
+  //     await axios.post("http://localhost:5000/api/v1/orders/create", orden, {
+  //       withCredentials: true
+  //     });
+  //     setOrder([]);
+  //   } catch (error) {
+  //     console.error("Error sending order:", error);
+  //   }
+  // };
+
+  // const enviarOrden = async () => {
+  //   try {
+  //     await axios.post(
+  //       "http://localhost:5000/api/v1/orders/create",
+  //       {
+  //         tableId: table.id,
+  //         // products: order.map((product) => product.price)
+  //         products: order
+  //       },
+  //       {
+  //         withCredentials: true
+  //       }
+  //     );
+  //     setOrder([]);
+  //   } catch (error) {
+  //     console.error("Error sending order:", error);
+  //   }
+  // };
+
+  const manejarEnviarOrden = async () => {
+    // Crear un mapa para contar las ocurrencias de cada producto
+    const conteoProductos: { [key: string]: Product } = order.reduce(
+      (acc: { [key: string]: Product }, producto: Product) => {
+        if (!acc[producto._id]) {
+          acc[producto._id] = { ...producto, quantity: 1 };
+        } else {
+          acc[producto._id].quantity! += 1; // Usamos el operador non-null assertion (!) porque estamos seguros de que quantity ya está definido
+        }
+        return acc;
+      },
+      {}
+    );
+
+    // Transformar el mapa en un array de productos con cantidad
+    const productosConCantidad: Product[] = Object.values(conteoProductos);
+
+    // Crear el objeto de la orden con la nueva estructura
+    const orden: Orden = {
+      tableId: table._id,
+      products: productosConCantidad.map(({ _id, quantity }) => ({
+        productId: _id,
+        _id,
+        quantity: quantity! // Usamos el operador non-null assertion (!) porque estamos seguros de que quantity está definido
+      }))
+    };
+
+    try {
+      await axios.post("http://localhost:5000/api/v1/orders/create", orden, {
+        withCredentials: true
+      });
+      setOrder([]);
+    } catch (error) {
+      console.error("Error sending order:", error);
+    }
+  };
 
   return (
     <Box mt={10} p={2}>
@@ -144,6 +237,10 @@ const TableOrder: React.FC<TableOrderProps> = ({ table, onClose }) => {
             )
             .toFixed(2)}
         </Typography>
+        <Button variant="contained" color="primary" sx={{ mt: 2 }}>
+          Enviar orden
+        </Button>
+        <button onClick={manejarEnviarOrden}>Enviar Orden</button>
       </Paper>
     </Box>
   );

@@ -5,6 +5,7 @@ import TableOrder from "./TableOrder";
 
 interface Table {
   id: number;
+  _id: number;
   name: string;
   occupied: boolean;
 }
