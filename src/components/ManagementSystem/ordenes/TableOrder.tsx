@@ -237,10 +237,15 @@ const TableOrder: React.FC<TableOrderProps> = ({ table, onClose }) => {
             )
             .toFixed(2)}
         </Typography>
-        <Button variant="contained" color="primary" sx={{ mt: 2 }}>
+        <Button
+          onClick={manejarEnviarOrden}
+          variant="contained"
+          color="primary"
+          sx={{ mt: 2 }}
+        >
           Enviar orden
         </Button>
-        <button onClick={manejarEnviarOrden}>Enviar Orden</button>
+        {/* <button onClick={manejarEnviarOrden}>Enviar Orden</button> */}
       </Paper>
     </Box>
   );
