@@ -94,43 +94,6 @@ const TableOrder: React.FC<TableOrderProps> = ({ table, onClose }) => {
     return false;
   });
 
-  // const enviarOrden = async () => {
-  //   const orden = {
-  //     tableId: table._id,
-  //     products: order.map((product) => ({
-  //       productId: product._id // Agrega esta línea
-  //       // quantity: product.price
-  //     }))
-  //   };
-  //   try {
-  //     await axios.post("http://localhost:5000/api/v1/orders/create", orden, {
-  //       withCredentials: true
-  //     });
-  //     setOrder([]);
-  //   } catch (error) {
-  //     console.error("Error sending order:", error);
-  //   }
-  // };
-
-  // const enviarOrden = async () => {
-  //   try {
-  //     await axios.post(
-  //       "http://localhost:5000/api/v1/orders/create",
-  //       {
-  //         tableId: table.id,
-  //         // products: order.map((product) => product.price)
-  //         products: order
-  //       },
-  //       {
-  //         withCredentials: true
-  //       }
-  //     );
-  //     setOrder([]);
-  //   } catch (error) {
-  //     console.error("Error sending order:", error);
-  //   }
-  // };
-
   const manejarEnviarOrden = async () => {
     // Crear un mapa para contar las ocurrencias de cada producto
     const conteoProductos: { [key: string]: Product } = order.reduce(
