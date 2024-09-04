@@ -5,6 +5,7 @@ export interface Order {
   tableId: string;
   status: string;
   total: number;
+  quantity: number;
   products: Product[];
   table: Table[];
   user: User[];
