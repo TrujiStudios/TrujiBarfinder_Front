@@ -25,6 +25,7 @@ export interface Product {
 
 export interface Table {
   _id: string;
+  id: string;
   name: string;
   company: string;
   description: string;
