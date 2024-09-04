@@ -55,7 +55,7 @@ const Mesas = () => {
           onClick={() => handleOpenModal()}
           style={styleess.ButonNuenva}
         >
-          Nueva
+          Nueva Mesa
         </Button>
       </Box>
       <p
