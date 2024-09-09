@@ -108,8 +108,11 @@ const Sell: React.FC = () => {
           }}
         >
           <Typography id="order-modal-title" variant="h6">
-            {selectedOrder
-              ? `Orden de ${selectedOrder.tableId}`
+            {tables
+              ? `Orden de ${
+                  tables.find((table) => table.id === selectedOrder?.tableId)
+                    ?.name
+                }`
               : "No hay orden"}
           </Typography>
           <Typography id="order-modal-description" sx={{ mt: 2 }}>
