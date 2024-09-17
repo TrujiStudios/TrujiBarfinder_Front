@@ -19,6 +19,7 @@ export const OrdertHook = () => {
         // Modifica la URL para incluir el orderId
         withCredentials: true
       });
+      console.log("response", response);
       setOrder(response.data);
     } catch (error) {
       console.error("Error fetching orders:", error);
