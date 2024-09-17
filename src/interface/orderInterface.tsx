@@ -13,14 +13,18 @@ export interface Order {
 
 export interface Product {
   _id: string;
+  productId: string;
   name: string;
   description: string;
   price: string;
+  promo: string;
+  quantity: number;
   category: string;
   status: boolean;
   image: string;
   code: string;
   company: string;
+  createdAt: string;
 }
 
 export interface Table {
