@@ -25,6 +25,8 @@ export interface Product {
   code: string;
   company: string;
   createdAt: string;
+  userId: string;
+  user: string;
 }
 
 export interface Table {

@@ -18,6 +18,7 @@ interface Producto {
   status: boolean;
   image: string;
   code: string;
+  userId: string;
 }
 
 const emptyProducto: Producto = {
@@ -28,7 +29,8 @@ const emptyProducto: Producto = {
   category: "",
   status: false,
   image: "",
-  code: ""
+  code: "",
+  userId: ""
 };
 
 const initialProductos: Producto[] = [];

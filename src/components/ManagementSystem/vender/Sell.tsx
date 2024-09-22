@@ -5,7 +5,7 @@ import {
   Grid,
   Typography,
   Modal,
-  Button,
+  // Button,
   Switch,
   TextField
 } from "@mui/material";
@@ -207,11 +207,9 @@ const Sell: React.FC = () => {
                           )}
                         </Typography>
                       </Grid>
-                      {/* <Grid item xs={1}>
-                        <Typography variant="body1">
-                          {product.seller}
-                        </Typography>
-                      </Grid> */}
+                      <Grid item xs={1}>
+                        <Typography variant="body1">{product.user}</Typography>
+                      </Grid>
                       {/* <Grid item xs={2}>
                         <Button variant="contained" color="error">
                           Cancelar
