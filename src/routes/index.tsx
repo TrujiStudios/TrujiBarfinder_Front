@@ -22,6 +22,7 @@ import { Dashboard } from "../components/ManagementSystem/Dashboard";
 import Sell from "../components/ManagementSystem/vender/Sell";
 // import TableOrder from "../components/ManagementSystem/ordenes/TableOrder";
 import TableOrderContainer from "../components/ManagementSystem/ordenes/TableOrderContainer";
+import UserCreate from "../components/ManagementSystem/user/UserCreate";
 
 const router = createBrowserRouter([
   {
@@ -82,6 +83,10 @@ const router = createBrowserRouter([
       {
         path: "order/:tableId",
         element: <TableOrderContainer />
+      },
+      {
+        path: "user/create",
+        element: <UserCreate />
       }
     ]
   }
