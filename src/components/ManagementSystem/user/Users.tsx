@@ -76,7 +76,9 @@ const Users: React.FC = () => {
             <TableHead>
               <TableRow>
                 <TableCell>Nombre</TableCell>
+                <TableCell>Apellido</TableCell>
                 <TableCell>Email</TableCell>
+                <TableCell>Teléfono</TableCell>
                 <TableCell>Rol</TableCell>
                 <TableCell>Estado</TableCell>
                 <TableCell align="right">Acciones</TableCell>
@@ -88,7 +90,9 @@ const Users: React.FC = () => {
                 .map((usuario) => (
                   <TableRow key={usuario._id}>
                     <TableCell>{usuario.name}</TableCell>
+                    <TableCell>{usuario.lastName}</TableCell>
                     <TableCell>{usuario.email}</TableCell>
+                    <TableCell>{usuario.phone}</TableCell>
                     <TableCell>{usuario.role.type}</TableCell>
                     <TableCell>
                       <Button
