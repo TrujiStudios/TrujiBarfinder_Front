@@ -27,7 +27,11 @@ import { styles } from "../../../../themes/NavbarThemes";
 import { Toolbar } from "../../../../themes/NavbarThemes";
 
 import { NavbarHoook } from "../../../../hook/NavbarHoook";
-import { accountList, accountListProduct } from "../../../../helper/AccounList";
+import {
+  accountList,
+  accountListConfig,
+  accountListProduct
+} from "../../../../helper/AccounList";
 import { NavBarProps } from "../../../../interface/navbarInterface";
 
 function a11yProps(index: number) {
@@ -45,12 +49,14 @@ export default function Navbar({ mode, toggleColorMode }: NavBarProps) {
     anchorElClients,
     anchorElProducts,
     anchorElExample,
+    anchorConfig,
     handleChange,
     toggleDrawer,
     handleAnalyticsMenuOpen,
     handleClientsMenuOpen,
     handleProductsMenuOpen,
     handleExampleMenuOpen,
+    handleConfigMenuOpen,
     handleMenuClose
   } = NavbarHoook();
 
@@ -140,10 +146,19 @@ export default function Navbar({ mode, toggleColorMode }: NavBarProps) {
 
             {/* // Tab para Example */}
             <Tab
-              label="Example"
+              label="ExampleEE"
               // aria-controls="clients-menu"
               aria-haspopup="true"
               onClick={handleExampleMenuOpen}
+              {...a11yProps(2)}
+            />
+
+            {/* Configuracion */}
+            <Tab
+              label="Configuracion"
+              // aria-controls="clients-menu"
+              aria-haspopup="true"
+              onClick={handleConfigMenuOpen}
               {...a11yProps(2)}
             />
             {/* Fin */}
@@ -209,6 +224,29 @@ export default function Navbar({ mode, toggleColorMode }: NavBarProps) {
               Mesa Uno
             </Link>
           </MenuItem>
+        </Menu>
+
+        {/* Menu configuracion */}
+
+        <Menu
+          id="configuracion-menu"
+          anchorEl={anchorConfig}
+          open={Boolean(anchorConfig)}
+          onClose={handleMenuClose}
+          keepMounted
+        >
+          <List>
+            {accountListConfig.map((item, index) => (
+              <ListItem onClick={handleMenuClose} key={index} disablePadding>
+                <ListItemButton>
+                  <ListItemIcon>{item.icon}</ListItemIcon>
+                  <ListItemText
+                    primary={<Link to={item.route}>{item.label}</Link>}
+                  />
+                </ListItemButton>
+              </ListItem>
+            ))}
+          </List>
         </Menu>
 
         {/* //Fin */}

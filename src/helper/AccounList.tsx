@@ -32,3 +32,12 @@ export const accountListProduct = [
     route: "/dashboard/product"
   }
 ];
+
+export const accountListConfig = [
+  {
+    label: "Usuarios",
+    icon: <RedeemTwoToneIcon sx={{ fontSize: 20, marginLeft: 3 }} />,
+    route: "/dashboard/user"
+    // route: "/dashboard/product"
+  }
+];
