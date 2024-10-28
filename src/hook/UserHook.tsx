@@ -5,7 +5,9 @@ import Swal from "sweetalert2";
 interface Usuario {
   _id: string;
   name: string;
+  lastName: string;
   email: string;
+  phone: string;
   role: string;
   status: boolean;
 }
@@ -13,7 +15,9 @@ interface Usuario {
 const emptyUsuario: Usuario = {
   _id: "",
   name: "",
+  lastName: "",
   email: "",
+  phone: "",
   role: "",
   status: false
 };
