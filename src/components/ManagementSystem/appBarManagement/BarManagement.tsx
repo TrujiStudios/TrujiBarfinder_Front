@@ -33,7 +33,10 @@ function BarManagement() {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               <Nav.Link style={styles.navar} as={Link} to="/dashboard">
-                <i style={styles.iconsDashboard} className="bi bi-ui-checks-grid"></i>
+                <i
+                  style={styles.iconsDashboard}
+                  className="bi bi-ui-checks-grid"
+                ></i>
                 Dashboard
               </Nav.Link>
               <Nav.Link style={styles.navar} as={Link} to="/dashboard/vender">
@@ -44,7 +47,6 @@ function BarManagement() {
               {/* Inicio */}
               <i style={styles.iconsProduct} className="bi bi-basket2-fill"></i>
               <NavDropdown
-
                 title="Productos"
                 id="basic-nav-dropdown"
                 className="custom-nav-dropdown"
@@ -55,7 +57,10 @@ function BarManagement() {
                   as={Link}
                   to="/dashboard/category"
                 >
-                  <i style={styles.iconsDashboard} className="bi bi-grid-1x2-fill"></i>
+                  <i
+                    style={styles.iconsDashboard}
+                    className="bi bi-grid-1x2-fill"
+                  ></i>
                   Categorias
                 </NavDropdown.Item>
                 <NavDropdown.Item
@@ -64,17 +69,25 @@ function BarManagement() {
                   to="/dashboard/product"
                 >
                   {/* <i  className="bi bi-basket2-fill"></i> */}
-                  <i style={styles.iconsDashboard} className="bi bi-basket3-fill"></i>
-
+                  <i
+                    style={styles.iconsDashboard}
+                    className="bi bi-basket3-fill"
+                  ></i>
                   Productos
                 </NavDropdown.Item>
                 <NavDropdown.Item style={styles.navar} href="#action/3.3">
-                  <i style={styles.iconsDashboard} className="bi bi-bag-check-fill"></i>
+                  <i
+                    style={styles.iconsDashboard}
+                    className="bi bi-bag-check-fill"
+                  ></i>
                   Promociones
                 </NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item style={styles.navar} href="#action/3.4">
-                  <i style={styles.iconsDashboard} className="bi bi-border-width"></i>
+                  <i
+                    style={styles.iconsDashboard}
+                    className="bi bi-border-width"
+                  ></i>
                   inventario
                 </NavDropdown.Item>
               </NavDropdown>
